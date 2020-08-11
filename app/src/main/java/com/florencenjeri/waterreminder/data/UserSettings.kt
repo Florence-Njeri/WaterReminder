@@ -1,6 +1,6 @@
 package com.florencenjeri.waterreminder.data
 
-data class User(
+data class UserSettings(
     val name: String,
     val goal: Int,
     val startTime: String,
