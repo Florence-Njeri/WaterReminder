@@ -7,9 +7,9 @@
 
     <fragment
         android:id="@+id/FirstFragment"
-        android:name="com.florencenjeri.waterreminder.ui.FirstFragment"
-        android:label="@string/first_fragment_label"
-        tools:layout="@layout/fragment_first">
+        android:name="com.florencenjeri.waterreminder.ui.ProfileSettingsFragment"
+        android:label="@string/profile_settings_fragment_label"
+        tools:layout="@layout/profile_settings_fragment">
 
         <action
             android:id="@+id/action_FirstFragment_to_SecondFragment"
@@ -18,7 +18,7 @@
     <fragment
         android:id="@+id/SecondFragment"
         android:name="com.florencenjeri.waterreminder.ui.SecondFragment"
-        android:label="@string/second_fragment_label"
+        android:label="@string/home_fragment_label"
         tools:layout="@layout/fragment_second">
 
         <action

@@ -1,0 +1,289 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="16dp"
+    android:orientation="vertical"
+    tools:context=".ui.ProfileSettingsFragment">
+
+    <!--Email Input View-->
+    <LinearLayout
+        android:id="@+id/name"
+        style="@style/LinearLayoutEditText">
+
+        <ImageView
+            android:id="@+id/image_name"
+            style="@style/ImageStyle"
+            android:contentDescription="Name Icon"
+            app:srcCompat="@drawable/ic_user" />
+
+        <EditText
+            android:id="@+id/editTextName"
+            style="@style/EditText"
+            android:hint="@string/enter_your_name"
+            android:imeOptions="actionNext"
+            android:inputType="text"
+            app:errorEnabled="true" />
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:alpha="0.3"
+        android:background="@color/black" />
+
+    <LinearLayout style="@style/LinearLayoutEditText">
+
+        <TextView
+            android:id="@+id/consumptionGoal"
+            style="@style/TextStyleNormal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:text="Daily water consumption goal:" />
+
+        <EditText
+            android:id="@+id/editTextGoal"
+            style="@style/EditText"
+            android:hint="e.g. 3000ml"
+            android:imeOptions="actionDone"
+            android:inputType="number"
+            app:errorEnabled="true" />
+    </LinearLayout>
+
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:alpha="0.3"
+        android:background="@color/black" />
+
+    <LinearLayout style="@style/LinearLayoutEditText">
+
+        <TextView
+            android:id="@+id/textView3"
+            style="@style/TextStyleNormal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="Sleep Shedule" />
+
+        <Button
+            android:id="@+id/startTimeButton"
+            style="?android:attr/borderlessButtonStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="32dp"
+            android:layout_gravity="center"
+            android:layout_marginLeft="16dp"
+            android:background="@drawable/name_view_rounded_corners"
+            android:text="10:00PM"
+            android:textAllCaps="false"
+            android:textColor="@drawable/button_text" />
+
+        <TextView
+            style="@style/TextStyleNormal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginBottom="16dp"
+            android:text="to" />
+
+        <Button
+            android:id="@+id/endTimeButton"
+            style="?android:attr/borderlessButtonStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="32dp"
+            android:layout_gravity="center"
+            android:background="@drawable/name_view_rounded_corners"
+            android:text="7:00AM"
+            android:textAllCaps="false"
+            android:textColor="@drawable/button_text" />
+
+
+    </LinearLayout>
+
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:alpha="0.3"
+        android:background="@color/black" />
+
+    <LinearLayout
+        android:id="@+id/gender"
+        style="@style/LinearLayoutEditText">
+
+        <TextView
+            android:id="@+id/textView4"
+            style="@style/TextStyleNormal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="Gender" />
+
+        <LinearLayout
+            android:id="@+id/time_button_container"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:layout_gravity="center"
+            android:layout_marginStart="16dp"
+            android:background="@drawable/name_view_rounded_corners"
+            android:orientation="horizontal"
+            android:padding="0.5dp">
+
+            <Button
+                android:id="@+id/maleButton"
+                style="?android:attr/borderlessButtonStyle"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/button_selector"
+                android:text="@string/male"
+                android:textAllCaps="false"
+                android:textColor="@drawable/button_text" />
+
+            <Button
+                android:id="@+id/femaleButton"
+                style="?android:attr/borderlessButtonStyle"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/button_selector"
+                android:text="@string/female"
+                android:textAllCaps="false"
+                android:textColor="@drawable/button_text" />
+
+        </LinearLayout>
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:alpha="0.3"
+        android:background="@color/black" />
+
+    <LinearLayout
+        android:id="@+id/weight"
+        style="@style/LinearLayoutEditText">
+
+        <TextView
+            android:id="@+id/textView5"
+            style="@style/TextStyleNormal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="16dp"
+            android:text="Weight:" />
+
+
+        <EditText
+            android:id="@+id/editTextWeight"
+            style="@style/EditText"
+            android:hint="e.g. 50kgs"
+            android:imeOptions="actionDone"
+            android:inputType="number"
+            app:errorEnabled="true" />
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:alpha="0.3"
+        android:background="@color/black" />
+
+    <LinearLayout
+        android:id="@+id/height"
+        style="@style/LinearLayoutEditText"
+        android:gravity="center">
+
+        <TextView
+            android:id="@+id/textView6"
+            style="@style/TextStyleNormal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="16dp"
+            android:text="Height:" />
+
+
+        <EditText
+            android:id="@+id/editTextHeight"
+            style="@style/EditText"
+            android:layout_height="wrap_content"
+            android:hint="e.g. 162 cm"
+            android:imeOptions="actionDone"
+            android:inputType="number"
+            app:errorEnabled="true" />
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:alpha="0.3"
+        android:background="@color/black" />
+
+    <LinearLayout
+        android:id="@+id/unitsOfMeasurement"
+        style="@style/LinearLayoutEditText">
+
+        <TextView
+            android:id="@+id/textView7"
+            style="@style/TextStyleNormal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="Units of Measurement:" />
+
+        <LinearLayout
+            android:id="@+id/measurements_button_container"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:layout_gravity="center"
+            android:layout_marginStart="16dp"
+            android:background="@drawable/name_view_rounded_corners"
+            android:orientation="horizontal"
+            android:padding="0.5dp">
+
+            <Button
+                android:id="@+id/kgsUnits"
+                style="?android:attr/borderlessButtonStyle"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/button_selector"
+                android:text="Kgs | Ml"
+                android:textAllCaps="false"
+                android:textColor="@drawable/button_text" />
+
+            <Button
+                android:id="@+id/poundsUnits"
+                style="?android:attr/borderlessButtonStyle"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/button_selector"
+                android:text="Lbs | oz"
+                android:textAllCaps="false"
+                android:textColor="@drawable/button_text" />
+
+        </LinearLayout>
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/save"
+        style="?android:attr/borderlessButtonStyle"
+        android:layout_width="102dp"
+        android:layout_height="48dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/name_view_rounded_corners"
+        android:text="Save"
+        android:textAllCaps="false"
+        android:textColor="@drawable/button_text" />
+
+</LinearLayout>
