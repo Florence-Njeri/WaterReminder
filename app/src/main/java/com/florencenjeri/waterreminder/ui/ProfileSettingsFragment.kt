@@ -1,12 +1,18 @@
 package com.florencenjeri.waterreminder.ui
 
+import android.app.TimePickerDialog
 import android.os.Bundle
+import android.text.format.DateFormat
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import androidx.fragment.app.Fragment
 import com.florencenjeri.waterreminder.R
+import com.florencenjeri.waterreminder.TimePickerFragment
 import kotlinx.android.synthetic.main.profile_settings_fragment.*
+import java.text.SimpleDateFormat
+import java.util.*
 
 /**
  * A simple [Fragment] subclass as the default destination in the navigation.
@@ -27,6 +33,12 @@ class ProfileSettingsFragment : Fragment() {
         kgsUnits.isSelected = true
         setSelectedGender()
         setSelectedMeasurements()
+        startTimeButton.setOnClickListener {
+            showTimePicker(startTimeButton)
+        }
+        endTimeButton.setOnClickListener {
+            showTimePicker(endTimeButton)
+        }
     }
 
     fun setSelectedGender() {
@@ -39,6 +51,7 @@ class ProfileSettingsFragment : Fragment() {
             femaleButton.isSelected = true
         }
     }
+
     fun setSelectedMeasurements() {
         kgsUnits.setOnClickListener {
             kgsUnits.isSelected = true
@@ -48,5 +61,28 @@ class ProfileSettingsFragment : Fragment() {
             kgsUnits.isSelected = false
             poundsUnits.isSelected = true
         }
+    }
+
+    fun showTimePicker(view: Button) {
+        TimePickerFragment().show(parentFragmentManager, "timePicker")
+        // Use the current time as the default values for the picker
+        val c = Calendar.getInstance()
+        val hour = c.get(Calendar.HOUR_OF_DAY)
+        val minute = c.get(Calendar.MINUTE)
+
+        // Create a new instance of TimePickerDialog and return it
+        val timeSetListener = TimePickerDialog.OnTimeSetListener { _, hourOfDay, minuteOfDay ->
+            c.set(Calendar.HOUR_OF_DAY, hourOfDay)
+            c.set(Calendar.MINUTE, minuteOfDay)
+            val time = SimpleDateFormat("HH:mm").format(c.time)
+            view.text = time
+        }
+        TimePickerDialog(
+            activity,
+            timeSetListener,
+            hour,
+            minute,
+            DateFormat.is24HourFormat(activity)
+        ).show()
     }
 }
