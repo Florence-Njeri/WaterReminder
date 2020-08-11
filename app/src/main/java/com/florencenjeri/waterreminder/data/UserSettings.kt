@@ -2,11 +2,11 @@ package com.florencenjeri.waterreminder.data
 
 data class UserSettings(
     val name: String,
-    val goal: Int,
+    val goal: String,
     val startTime: String,
     val endTime: String,
     val gender: String,
-    val weight: Int,
-    val height: Int,
+    val weight: String,
+    val height: String,
     val measurementUnits: String
 )

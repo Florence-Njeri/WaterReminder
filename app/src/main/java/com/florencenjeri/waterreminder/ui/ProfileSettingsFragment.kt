@@ -8,7 +8,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
+import com.florencenjeri.waterreminder.App
 import com.florencenjeri.waterreminder.R
+import com.florencenjeri.waterreminder.database.UserSettingsEntity
 import kotlinx.android.synthetic.main.profile_settings_fragment.*
 import java.text.SimpleDateFormat
 import java.util.*
@@ -38,6 +41,21 @@ class ProfileSettingsFragment : Fragment() {
         endTimeButton.setOnClickListener {
             showTimePicker(endTimeButton)
         }
+        saveButton.setOnClickListener {
+            val settings = UserSettingsEntity(
+                0,
+                editTextName.text.toString(),
+                editTextGoal.text.toString(),
+                startTimeButton.text.toString(),
+                endTimeButton.text.toString(),
+                getSelectedGender(),
+                editTextHeight.text.toString(),
+                editTextWeight.text.toString(),
+                getSelectedMeasurements()
+            )
+            App.dao.setUserSettings(settings)
+            findNavController().navigate(R.id.action_FirstFragment_to_SecondFragment)
+        }
     }
 
     fun setSelectedGender() {
@@ -51,6 +69,14 @@ class ProfileSettingsFragment : Fragment() {
         }
     }
 
+    private fun getSelectedGender(): String {
+        return if (maleButton.isSelected) {
+            "Male"
+        } else {
+            "Female"
+        }
+    }
+
     fun setSelectedMeasurements() {
         kgsUnits.setOnClickListener {
             kgsUnits.isSelected = true
@@ -59,6 +85,14 @@ class ProfileSettingsFragment : Fragment() {
         poundsUnits.setOnClickListener {
             kgsUnits.isSelected = false
             poundsUnits.isSelected = true
+        }
+    }
+
+    fun getSelectedMeasurements(): String {
+        return if (kgsUnits.isSelected) {
+            "Kgs | Ml"
+        } else {
+            "Lbs | oz"
         }
     }
 

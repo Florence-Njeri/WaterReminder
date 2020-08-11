@@ -276,7 +276,7 @@
     </LinearLayout>
 
     <Button
-        android:id="@+id/save"
+        android:id="@+id/saveButton"
         style="?android:attr/borderlessButtonStyle"
         android:layout_width="102dp"
         android:layout_height="48dp"
