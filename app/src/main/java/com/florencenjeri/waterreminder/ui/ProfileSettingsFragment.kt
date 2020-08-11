@@ -9,7 +9,6 @@ import android.view.ViewGroup
 import android.widget.Button
 import androidx.fragment.app.Fragment
 import com.florencenjeri.waterreminder.R
-import com.florencenjeri.waterreminder.TimePickerFragment
 import kotlinx.android.synthetic.main.profile_settings_fragment.*
 import java.text.SimpleDateFormat
 import java.util.*
@@ -64,7 +63,6 @@ class ProfileSettingsFragment : Fragment() {
     }
 
     fun showTimePicker(view: Button) {
-        TimePickerFragment().show(parentFragmentManager, "timePicker")
         // Use the current time as the default values for the picker
         val c = Calendar.getInstance()
         val hour = c.get(Calendar.HOUR_OF_DAY)
