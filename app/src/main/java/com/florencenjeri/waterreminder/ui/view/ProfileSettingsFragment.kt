@@ -1,4 +1,4 @@
-package com.florencenjeri.waterreminder.ui
+package com.florencenjeri.waterreminder.ui.view
 
 import android.app.TimePickerDialog
 import android.os.Bundle
@@ -8,19 +8,17 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
-import com.florencenjeri.waterreminder.App
 import com.florencenjeri.waterreminder.R
 import com.florencenjeri.waterreminder.database.UserSettingsEntity
+import com.florencenjeri.waterreminder.ui.viewModel.UserSettingsViewModel
 import kotlinx.android.synthetic.main.profile_settings_fragment.*
 import java.text.SimpleDateFormat
 import java.util.*
 
-/**
- * A simple [Fragment] subclass as the default destination in the navigation.
- */
 class ProfileSettingsFragment : Fragment() {
-
+    private val viewModel by lazy { ViewModelProvider(this).get(UserSettingsViewModel::class.java) }
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -53,7 +51,7 @@ class ProfileSettingsFragment : Fragment() {
                 editTextWeight.text.toString(),
                 getSelectedMeasurements()
             )
-            App.dao.setUserSettings(settings)
+            viewModel.saveUserSettings(settings)
             findNavController().navigate(R.id.action_FirstFragment_to_SecondFragment)
         }
     }
