@@ -6,6 +6,7 @@ import com.florencenjeri.waterreminder.database.UserSettingsDatabase
 import com.florencenjeri.waterreminder.di.applicationModule
 import com.florencenjeri.waterreminder.di.databaseModule
 import com.florencenjeri.waterreminder.di.presenterModule
+import com.florencenjeri.waterreminder.di.repositoryModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.core.context.startKoin
@@ -31,7 +32,7 @@ class App : Application() {
             androidContext(this@App)
             //Declare all my D.I modules
             modules(
-                presenterModule, databaseModule, applicationModule
+                presenterModule, databaseModule, applicationModule, repositoryModule
             )
         }
 
