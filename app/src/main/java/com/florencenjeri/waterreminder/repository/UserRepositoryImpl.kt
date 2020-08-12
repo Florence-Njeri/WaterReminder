@@ -4,7 +4,7 @@ import com.florencenjeri.waterreminder.prefs.UserPrefsManager
 
 class UserRepositoryImpl(private val sharedPreferenceManager: UserPrefsManager) :
     UserRepository {
-    override fun isUserSettingsConfigured(): Boolean =
+    override fun areProfileSettingsConfigured(): Boolean =
         sharedPreferenceManager.isUserSettingsConfigured()
 
     override fun configuredUserSettings(isConfigured: Boolean) =

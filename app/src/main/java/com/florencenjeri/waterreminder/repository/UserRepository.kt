@@ -1,6 +1,6 @@
 package com.florencenjeri.waterreminder.repository
 
 interface UserRepository {
-    fun isUserSettingsConfigured(): Boolean
+    fun areProfileSettingsConfigured(): Boolean
     fun configuredUserSettings(isConfigured: Boolean)
 }
