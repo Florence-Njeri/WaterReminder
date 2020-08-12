@@ -17,7 +17,7 @@
     </fragment>
     <fragment
         android:id="@+id/SecondFragment"
-        android:name="com.florencenjeri.waterreminder.ui.SecondFragment"
+        android:name="com.florencenjeri.waterreminder.ui.view.HomeFragment"
         android:label="@string/home_fragment_label"
         tools:layout="@layout/fragment_second">
 

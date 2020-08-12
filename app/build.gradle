@@ -51,5 +51,10 @@ dependencies {
     annotationProcessor "android.arch.persistence.room:compiler:1.0.0"
     androidTestImplementation "android.arch.persistence.room:testing:1.0.0"
     androidTestImplementation "android.arch.core:core-testing:1.1.0"
+    //Koin
+    implementation "org.koin:koin-android:2.1.6"
+    implementation "org.koin:koin-android-viewmodel:2.1.6"
+    implementation "org.koin:koin-androidx-scope:2.1.6"
+    testImplementation "org.koin:koin-test:2.1.6"
 
 }

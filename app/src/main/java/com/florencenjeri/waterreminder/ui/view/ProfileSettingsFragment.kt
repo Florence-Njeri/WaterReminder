@@ -8,17 +8,17 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.florencenjeri.waterreminder.R
 import com.florencenjeri.waterreminder.database.UserSettingsEntity
 import com.florencenjeri.waterreminder.ui.viewModel.UserSettingsViewModel
 import kotlinx.android.synthetic.main.profile_settings_fragment.*
+import org.koin.android.viewmodel.ext.android.viewModel
 import java.text.SimpleDateFormat
 import java.util.*
 
 class ProfileSettingsFragment : Fragment() {
-    private val viewModel by lazy { ViewModelProvider(this).get(UserSettingsViewModel::class.java) }
+    private val userSettingsViewModel: UserSettingsViewModel by viewModel()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -51,7 +51,7 @@ class ProfileSettingsFragment : Fragment() {
                 editTextWeight.text.toString(),
                 getSelectedMeasurements()
             )
-            viewModel.saveUserSettings(settings)
+            userSettingsViewModel.saveUserSettings(settings)
             findNavController().navigate(R.id.action_FirstFragment_to_SecondFragment)
         }
     }
