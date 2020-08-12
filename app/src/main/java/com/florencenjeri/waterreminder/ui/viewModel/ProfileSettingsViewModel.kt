@@ -21,6 +21,7 @@ class ProfileSettingsViewModel(
     fun getCredentialsValidationState(): LiveData<CredentialsValidationState> =
         credentialsValidationState
 
+    //Save the users settings in Room DB
     fun saveUserSettings(settings: UserSettingsEntity) = viewModelScope.launch(Dispatchers.IO) {
         settingsRepository.setUserSettings(settings)
     }
