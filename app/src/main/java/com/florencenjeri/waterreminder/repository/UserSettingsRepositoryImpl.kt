@@ -1,0 +1,3 @@
+package com.florencenjeri.waterreminder.repository
+
+interface UserSettingsRepositoryImpl
