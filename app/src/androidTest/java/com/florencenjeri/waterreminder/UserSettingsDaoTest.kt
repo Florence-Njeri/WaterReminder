@@ -39,7 +39,7 @@ class UserSettingsDaoTest {
     fun testInsertingAndRetrievingFromDb() = runBlocking {
         userSettingsDao.setUserSettings(
             UserSettingsEntity(
-0,
+                0,
                 "Florence Njeri",
                 "3000",
                 "2c776fa0-9c43-46c0-8f78-88eb54aa733a",

@@ -1,6 +1,6 @@
 package com.florencenjeri.waterreminder.utils
 
-class SettingsCredentialsValidator {
+class SettingsCredentialsValidator : CredentialsValidator {
     private lateinit var username: String
     private lateinit var waterConsumptionGoal: String
     private lateinit var weight: String
@@ -8,7 +8,7 @@ class SettingsCredentialsValidator {
     private lateinit var sleepingTime: String
     private lateinit var wakeUpTime: String
 
-    fun setCredentials(
+    override fun setUserCredentials(
         username: String,
         waterConsumptionGoal: String,
         weight: String,
@@ -24,13 +24,12 @@ class SettingsCredentialsValidator {
         this.wakeUpTime = wakeUpTime
     }
 
-    fun isNameValid() = username.length > 4
-    fun isConsumptionGoalValid() = waterConsumptionGoal.length > 1
-    fun isWeightValid() = weight.length > 2
-    fun isHeightValid() = height.length > 2
-    fun isSleepingTimeValid() = sleepingTime.isNotBlank()
-    fun isWakeUpTimeValid() = wakeUpTime.isNotBlank()
-
-    fun areCredentialsValid() =
+    override fun isNameValid() = username.length > 4
+    override fun isConsumptionGoalValid() = waterConsumptionGoal.length > 1
+    override fun isWeightValid() = weight.length > 2
+    override fun isHeightValid() = height.length > 2
+    override fun isSleepingTimeValid() = sleepingTime.isNotBlank()
+    override fun isWakeUpTimeValid() = wakeUpTime.isNotBlank()
+    override fun areCredentialsValid() =
         isNameValid() && isConsumptionGoalValid() && isWakeUpTimeValid() && isHeightValid() && isWeightValid() && isSleepingTimeValid()
 }
