@@ -3,6 +3,7 @@ package com.florencenjeri.waterreminder
 import android.app.Application
 import android.content.Context
 import com.florencenjeri.waterreminder.database.UserSettingsDatabase
+import com.florencenjeri.waterreminder.di.applicationModule
 import com.florencenjeri.waterreminder.di.databaseModule
 import com.florencenjeri.waterreminder.di.presenterModule
 import org.koin.android.ext.koin.androidContext
@@ -30,7 +31,7 @@ class App : Application() {
             androidContext(this@App)
             //Declare all my D.I modules
             modules(
-                presenterModule, databaseModule
+                presenterModule, databaseModule, applicationModule
             )
         }
 
