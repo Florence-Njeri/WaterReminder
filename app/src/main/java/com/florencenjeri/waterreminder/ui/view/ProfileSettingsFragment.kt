@@ -47,23 +47,29 @@ class ProfileSettingsFragment : Fragment() {
             showTimePicker(endTimeButton)
         }
         saveButton.setOnClickListener {
+            val name = editTextName.text.trim().toString()
+            val goal = editTextGoal.text.trim().toString()
+            val startTime = startTimeButton.text.toString()
+            val endTime = endTimeButton.text.toString()
+            val height = editTextHeight.text.trim().toString()
+            val weight = editTextWeight.text.trim().toString()
             profileSettingsViewModel.checkCredentials(
-                editTextName.text.toString(),
-                editTextGoal.text.toString(),
-                startTimeButton.text.toString(),
-                endTimeButton.text.toString(),
-                getSelectedGender(),
-                editTextHeight.text.toString()
+                name,
+                goal,
+                startTime,
+                endTime,
+                height,
+                weight
             )
             val settings = UserSettingsEntity(
                 0,
-                editTextName.text.toString(),
-                editTextGoal.text.toString(),
-                startTimeButton.text.toString(),
-                endTimeButton.text.toString(),
+                name,
+                goal,
+                startTime,
+                endTime,
                 getSelectedGender(),
-                editTextHeight.text.toString(),
-                editTextWeight.text.toString(),
+                height,
+                weight,
                 getSelectedMeasurements()
             )
             profileSettingsViewModel.saveUserSettings(settings)

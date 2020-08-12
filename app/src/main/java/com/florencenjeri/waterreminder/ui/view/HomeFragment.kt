@@ -1,6 +1,7 @@
 package com.florencenjeri.waterreminder.ui.view
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -30,7 +31,7 @@ class HomeFragment : Fragment() {
             welcomeTextView.text = String.format(getString(R.string.hello_user), settings.name)
             goalsTextView.text =
                 String.format(getString(R.string.water_consumption_goal), settings.goal)
-
+            Log.d("Settings", settings.toString())
         })
 
     }
