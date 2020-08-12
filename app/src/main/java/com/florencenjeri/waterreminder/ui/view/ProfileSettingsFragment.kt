@@ -67,7 +67,6 @@ class ProfileSettingsFragment : Fragment() {
                 getSelectedMeasurements()
             )
             profileSettingsViewModel.saveUserSettings(settings)
-            navigateToHomeScreen()
         }
     }
 
