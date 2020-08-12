@@ -7,24 +7,24 @@
     tools:context=".ui.view.HomeFragment">
 
     <TextView
-        android:id="@+id/textview_second"
+        android:id="@+id/welcomeTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:text="Hello,  %1$d "
+        android:text="@string/hello_user"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/textView8"
+        android:id="@+id/goalsTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:text="You are  %1$d from your goal"
+        android:text="@string/water_consumption_goal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textview_second" />
+        app:layout_constraintTop_toBottomOf="@+id/welcomeTextView" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

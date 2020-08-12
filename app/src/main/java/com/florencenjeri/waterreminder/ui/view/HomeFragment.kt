@@ -1,13 +1,14 @@
 package com.florencenjeri.waterreminder.ui.view
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import com.florencenjeri.waterreminder.R
 import com.florencenjeri.waterreminder.ui.viewModel.HomeViewModel
+import kotlinx.android.synthetic.main.fragment_second.*
 import org.koin.android.viewmodel.ext.android.viewModel
 
 /**
@@ -25,9 +26,13 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val settings = homeViewModel.getUserSettingsData()
+        homeViewModel.getUserSettingsData().observe(viewLifecycleOwner, Observer { settings ->
+            welcomeTextView.text = String.format(getString(R.string.hello_user), settings.name)
+            goalsTextView.text =
+                String.format(getString(R.string.water_consumption_goal), settings.goal)
 
-        Log.d("ViewModel", settings.toString())
+        })
+
     }
 
 }
