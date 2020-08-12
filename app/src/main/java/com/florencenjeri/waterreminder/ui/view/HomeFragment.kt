@@ -6,12 +6,14 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.florencenjeri.waterreminder.R
+import com.florencenjeri.waterreminder.ui.viewModel.HomeViewModel
+import org.koin.android.viewmodel.ext.android.viewModel
 
 /**
  * A simple [Fragment] subclass as the second destination in the navigation.
  */
 class HomeFragment : Fragment() {
-
+    val homeViewModel: HomeViewModel by viewModel()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
