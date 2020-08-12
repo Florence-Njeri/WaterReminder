@@ -14,8 +14,7 @@ class SettingsCredentialsValidator {
         weight: String,
         height: String,
         sleepingTime: String,
-        wakeUpTime: String,
-        unitsOfMeasure: String
+        wakeUpTime: String
     ) {
         this.username = username
         this.waterConsumptionGoal = waterConsumptionGoal
