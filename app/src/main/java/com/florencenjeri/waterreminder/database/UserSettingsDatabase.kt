@@ -5,7 +5,7 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 
-@Database(entities = [(UserSettingsEntity::class)], version = 1)
+@Database(entities = [(UserSettingsEntity::class)], version = 2)
 abstract class UserSettingsDatabase : RoomDatabase() {
     abstract fun userSettingsDao(): UserSettingsDao
 
@@ -27,7 +27,7 @@ abstract class UserSettingsDatabase : RoomDatabase() {
                     context.applicationContext,
                     UserSettingsDatabase::class.java,
                     NEWS_DB
-                )
+                ).fallbackToDestructiveMigration()
                     .build()
                 INSTANCE = instance
                 return instance
