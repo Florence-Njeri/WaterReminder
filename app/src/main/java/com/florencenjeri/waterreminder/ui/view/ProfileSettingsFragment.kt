@@ -80,7 +80,7 @@ class ProfileSettingsFragment : Fragment() {
     }
 
     private fun navigateToHomeScreen() {
-        findNavController().navigate(R.id.action_SettingsFragment_to_HomeFragment)
+        findNavController().navigate(R.id.action_ProfileSettingsFragment_to_HomeFragment)
     }
 
     fun susbscribeToData() {

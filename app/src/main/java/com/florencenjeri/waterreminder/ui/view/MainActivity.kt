@@ -44,6 +44,6 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun navigateToSettingsScreen() {
-        this.findNavController(R.id.nav_host_fragment).navigate(R.id.SettingsFragment)
+        this.findNavController(R.id.nav_host_fragment).navigate(R.id.settingsFragment)
     }
 }
