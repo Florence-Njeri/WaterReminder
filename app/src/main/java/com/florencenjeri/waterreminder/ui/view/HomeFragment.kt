@@ -1,7 +1,6 @@
 package com.florencenjeri.waterreminder.ui.view
 
 import android.os.Bundle
-import android.util.Log
 import android.view.*
 import android.widget.Toast
 import androidx.fragment.app.Fragment
@@ -24,7 +23,7 @@ class HomeFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-//        homeViewModel.setUpReminder()
+        homeViewModel.setUpReminder()
         return inflater.inflate(R.layout.fragment_second, container, false)
     }
 
@@ -38,9 +37,8 @@ class HomeFragment : Fragment() {
             val numberOfReminders = settings.goal.toDouble() / settings.cupMeasurements.toInt()
             goalsTextView.text =
                 String.format(getString(R.string.water_consumption_goal), settings.goal)
-            Log.d("Settings", settings.toString())
+            String.format(getString(R.string.notification_title), settings.name)
             if (toGoal == 0) {
-                String.format(getString(R.string.notification_title), settings.name)
                 homeViewModel.stopReminder()
             }
         })

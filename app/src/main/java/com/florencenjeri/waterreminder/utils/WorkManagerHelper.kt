@@ -25,7 +25,8 @@ open class WorkManagerHelper(private val workManager: WorkManager) {
 
     private fun buildConstraints(): Constraints {
         val constraints = Constraints.Builder()
-            .setRequiresCharging(false)
+            .setRequiresStorageNotLow(true)
+            .setRequiresBatteryNotLow(true)
             .build()
         return constraints
     }
