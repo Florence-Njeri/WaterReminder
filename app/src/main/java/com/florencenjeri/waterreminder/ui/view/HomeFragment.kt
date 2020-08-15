@@ -1,7 +1,6 @@
 package com.florencenjeri.waterreminder.ui.view
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -22,25 +21,23 @@ class HomeFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
+//        homeViewModel.setUpReminder()
         return inflater.inflate(R.layout.fragment_second, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        setHasOptionsMenu(true)
         homeViewModel.getUserSettingsData().observe(viewLifecycleOwner, Observer { settings ->
             welcomeTextView.text = String.format(getString(R.string.hello_user), settings.name)
             val toGoal = settings.goal.toInt() - settings.cupMeasurements.toInt()
             val numberOfReminders = settings.goal.toDouble() / settings.cupMeasurements.toInt()
             goalsTextView.text =
                 String.format(getString(R.string.water_consumption_goal), settings.goal)
-            Log.d("Settings", settings.toString())
-            if (toGoal == 0) {
-                String.format(getString(R.string.notification_title), settings.name)
-                homeViewModel.stopReminder()
-            } else {
-                homeViewModel.setUpReminder()
-            }
-
+            String.format(getString(R.string.notification_title), settings.name)
+//            if (toGoal == 0) {
+//                homeViewModel.stopReminder()
+//            }
         })
     }
 

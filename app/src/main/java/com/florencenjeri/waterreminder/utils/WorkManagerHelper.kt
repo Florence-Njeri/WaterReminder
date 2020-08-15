@@ -17,7 +17,7 @@ open class WorkManagerHelper(private val workManager: WorkManager) {
     }
 
     private fun buildWorker(constraints: Constraints): PeriodicWorkRequest {
-        return PeriodicWorkRequestBuilder<ReminderWorkManager>(15, TimeUnit.MINUTES)
+        return PeriodicWorkRequestBuilder<ReminderWorkManager>(15, TimeUnit.SECONDS)
             .setConstraints(constraints)
             .build()
 
@@ -25,9 +25,7 @@ open class WorkManagerHelper(private val workManager: WorkManager) {
 
     private fun buildConstraints(): Constraints {
         val constraints = Constraints.Builder()
-            .setRequiresStorageNotLow(true)
-            .setRequiresBatteryNotLow(true)
-            .setRequiredNetworkType(NetworkType.CONNECTED)
+            .setRequiresCharging(false)
             .build()
         return constraints
     }
