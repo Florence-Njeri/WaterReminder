@@ -13,4 +13,8 @@ interface UserSettingsDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun setUserSettings(userSettings: UserSettingsEntity)
+
+    @Query("SELECT * FROM user_settings WHERE id = :id")
+    fun getUser(id: Long): LiveData<UserSettingsEntity>
+
 }

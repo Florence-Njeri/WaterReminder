@@ -8,6 +8,10 @@ class SettingsRepositoryImpl(private val userSettingsDao: UserSettingsDao) : Set
     override fun retrieveUserSettings(): LiveData<UserSettingsEntity> =
         userSettingsDao.retrieveUserSettings()
 
+    override fun getUser(id: Long): LiveData<UserSettingsEntity> {
+        return userSettingsDao.getUser(id)
+    }
+
     override suspend fun setUserSettings(userSettings: UserSettingsEntity) =
         userSettingsDao.setUserSettings(userSettings)
 }

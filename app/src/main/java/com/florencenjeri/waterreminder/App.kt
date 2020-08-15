@@ -56,7 +56,7 @@ class App : Application() {
     }
 
     private fun buildWorker(): PeriodicWorkRequest {
-        return PeriodicWorkRequestBuilder<ReminderWorkManager>(15, TimeUnit.SECONDS)
+        return PeriodicWorkRequestBuilder<ReminderWorkManager>(15, TimeUnit.MINUTES)
             .build()
 
     }

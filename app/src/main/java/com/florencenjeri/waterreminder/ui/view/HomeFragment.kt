@@ -18,6 +18,7 @@ import org.koin.android.viewmodel.ext.android.viewModel
  */
 class HomeFragment : Fragment() {
     val homeViewModel: HomeViewModel by viewModel()
+    private var userId: Long = 1
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -31,6 +32,7 @@ class HomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         setHasOptionsMenu(true)
         homeViewModel.getUserSettingsData().observe(viewLifecycleOwner, Observer { settings ->
+            userId = settings.id
             welcomeTextView.text = String.format(getString(R.string.hello_user), settings.name)
             val toGoal = settings.goal.toInt() - settings.cupMeasurements.toInt()
             val numberOfReminders = settings.goal.toDouble() / settings.cupMeasurements.toInt()
@@ -58,6 +60,8 @@ class HomeFragment : Fragment() {
     }
 
     private fun navigateToSettingsScreen() {
-        findNavController().navigate(R.id.action_HomeFragment_to_settingsFragment)
+        val action =
+            HomeFragmentDirections.actionHomeFragmentToSettingsFragment(userId)
+        findNavController().navigate(action)
     }
 }

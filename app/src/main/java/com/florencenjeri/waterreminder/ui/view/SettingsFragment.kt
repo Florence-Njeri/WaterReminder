@@ -23,25 +23,32 @@ class SettingsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        homeViewModel.getProfileSettings().observe(viewLifecycleOwner, Observer { settings ->
-            userName.text = settings.name
-            goal.text = settings.goal
-            glassSize.text = settings.cupMeasurements
-            sleepingTime.text = settings.startTime
-            wakeUpTime.text = settings.endTime
-            weight.text = settings.weight
-            height.text = settings.height
-            if (settings.gender == "Male") {
-                maleButton.isSelected = true
-            } else {
-                femaleButtonSettings.isSelected = true
-            }
-            if (settings.measurementUnits == "Kgs | Ml") {
-                kgsUnits.isSelected = true
-            } else {
-                poundsUnitsSettings.isSelected = true
-            }
+        arguments?.let {
+            val safeArgs =
+                SettingsFragmentArgs.fromBundle(
+                    it
+                )
+            homeViewModel.getUserById(safeArgs.userId)
+                .observe(viewLifecycleOwner, Observer { settings ->
+                    userName.text = settings.name
+                    goal.text = settings.goal
+                    glassSize.text = settings.cupMeasurements
+                    sleepingTime.text = settings.startTime
+                    wakeUpTime.text = settings.endTime
+                    weight.text = settings.weight
+                    height.text = settings.height
+                    if (settings.gender == "Male") {
+                        maleButton.isSelected = true
+                    } else {
+                        femaleButtonSettings.isSelected = true
+                    }
+                    if (settings.measurementUnits == "Kgs | Ml") {
+                        kgsUnits.isSelected = true
+                    } else {
+                        poundsUnitsSettings.isSelected = true
+                    }
+                })
 
-        })
+        }
     }
 }

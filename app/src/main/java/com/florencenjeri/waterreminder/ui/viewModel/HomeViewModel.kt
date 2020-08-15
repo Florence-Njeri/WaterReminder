@@ -15,6 +15,8 @@ class HomeViewModel(
     fun getProfileSettings(): LiveData<UserSettingsEntity> = profileSettings
     fun getUserSettingsData() = settingsRepository.retrieveUserSettings()
 
+    fun getUserById(userId: Long) = settingsRepository.getUser(userId)
+
     fun setUpReminder() {
         workManagerHelper.scheduleWaterReminder()
     }
