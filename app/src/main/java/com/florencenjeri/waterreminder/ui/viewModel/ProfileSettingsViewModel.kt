@@ -35,6 +35,7 @@ class ProfileSettingsViewModel(
     fun checkCredentials(
         username: String,
         waterConsumptionGoal: String,
+        cupMeasurement: String,
         weight: String,
         height: String,
         sleepingTime: String,
@@ -43,6 +44,7 @@ class ProfileSettingsViewModel(
         validator.setUserCredentials(
             username,
             waterConsumptionGoal,
+            cupMeasurement,
             weight,
             height,
             sleepingTime,
@@ -50,6 +52,7 @@ class ProfileSettingsViewModel(
         )
         checkUsername()
         checkConsumptionGoal()
+        checkCupMeasurement()
         checkWeight()
         checkHeight()
         checkSleepingTime()
@@ -73,6 +76,14 @@ class ProfileSettingsViewModel(
             credentialsValidationState.value = CredentialsValidationState.ConsumptionGoalValid
         } else {
             credentialsValidationState.value = CredentialsValidationState.ConsumptionGoalInvalid
+        }
+    }
+
+    fun checkCupMeasurement() {
+        if (validator.isCupMeasurementValid()) {
+            credentialsValidationState.value = CredentialsValidationState.CupMeasurementValid
+        } else {
+            credentialsValidationState.value = CredentialsValidationState.CupMeasurementInvalid
         }
     }
 
@@ -124,4 +135,6 @@ sealed class CredentialsValidationState {
     object SleepingTimeInvalid : CredentialsValidationState()
     object WakeUpTimeValid : CredentialsValidationState()
     object WakeUpTimeInvalid : CredentialsValidationState()
+    object CupMeasurementValid : CredentialsValidationState()
+    object CupMeasurementInvalid : CredentialsValidationState()
 }

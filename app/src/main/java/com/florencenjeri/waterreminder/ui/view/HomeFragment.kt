@@ -29,11 +29,16 @@ class HomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         homeViewModel.getUserSettingsData().observe(viewLifecycleOwner, Observer { settings ->
             welcomeTextView.text = String.format(getString(R.string.hello_user), settings.name)
+            val toGoal = settings.goal.toInt() - settings.cupMeasurements.toInt()
+            val numberOfReminders = settings.goal.toDouble() / settings.cupMeasurements.toInt()
             goalsTextView.text =
                 String.format(getString(R.string.water_consumption_goal), settings.goal)
             Log.d("Settings", settings.toString())
+            if (toGoal == 0) {
+                homeViewModel.stopReminder()
+            }
+            homeViewModel.setUpReminder()
         })
-
     }
 
 }

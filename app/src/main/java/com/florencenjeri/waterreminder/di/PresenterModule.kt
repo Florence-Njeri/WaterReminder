@@ -12,5 +12,5 @@ val presenterModule = module {
             ProfileSettingsViewModel(get(), get(), get())
         }
     }
-    viewModel { HomeViewModel(get()) }
+    viewModel { HomeViewModel(get(), get()) }
 }

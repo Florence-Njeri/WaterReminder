@@ -49,6 +49,7 @@ class ProfileSettingsFragment : Fragment() {
         saveButton.setOnClickListener {
             val name = editTextName.text.trim().toString()
             val goal = editTextGoal.text.trim().toString()
+            val cupMeasurement = editTextGoal.text.trim().toString()
             val startTime = startTimeButton.text.toString()
             val endTime = endTimeButton.text.toString()
             val height = editTextHeight.text.trim().toString()
@@ -56,6 +57,7 @@ class ProfileSettingsFragment : Fragment() {
             profileSettingsViewModel.checkCredentials(
                 name,
                 goal,
+                cupMeasurement,
                 startTime,
                 endTime,
                 height,
@@ -65,6 +67,7 @@ class ProfileSettingsFragment : Fragment() {
                 0,
                 name,
                 goal,
+                cupMeasurement,
                 startTime,
                 endTime,
                 getSelectedGender(),
@@ -102,7 +105,17 @@ class ProfileSettingsFragment : Fragment() {
             CredentialsValidationState.SleepingTimeValid -> removeSleepingTimeError()
             CredentialsValidationState.WakeUpTimeInvalid -> setWakeUpTimeError()
             CredentialsValidationState.WakeUpTimeValid -> removeWakeUpTimeError()
+            CredentialsValidationState.CupMeasurementValid -> setCupMeasurementError()
+            CredentialsValidationState.CupMeasurementInvalid -> removeCupMeasurementError()
         }
+
+    private fun removeCupMeasurementError() {
+        editTextGlassSize.error = "Set a valid glass size"
+    }
+
+    private fun setCupMeasurementError() {
+        editTextGlassSize.error = null
+    }
 
     fun setNameError() {
         editTextName.error = "Set a valid name"

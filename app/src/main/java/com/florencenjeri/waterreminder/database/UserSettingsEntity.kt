@@ -13,6 +13,8 @@ data class UserSettingsEntity(
     val name: String,
     @ColumnInfo(name = "goal")
     val goal: String,
+    @ColumnInfo(name = "cup_measurements")
+    val cupMeasurements: String,
     @ColumnInfo(name = "start_time")
     val startTime: String,
     @ColumnInfo(name = "end_time")
