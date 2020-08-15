@@ -6,7 +6,7 @@ import java.util.concurrent.TimeUnit
 
 open class WorkManagerHelper(private val workManager: WorkManager) {
     //Background work should not delay app start
-    private fun scheduleWaterReminder() {
+    fun scheduleWaterReminder() {
         val constraints = buildConstraints()
         val worker = buildWorker(constraints)
         workManager.enqueueUniquePeriodicWork(
