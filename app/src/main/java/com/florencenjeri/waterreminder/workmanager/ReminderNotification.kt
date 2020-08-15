@@ -20,7 +20,7 @@ fun NotificationManager.sendNotification(messageBody: String, applicationContext
     )
     val builder = NotificationCompat.Builder(
         applicationContext,
-        applicationContext.getString(R.string.water_reminder_channel_id)
+        applicationContext.getString(R.string.drink_water_channel_id)
     )
         .setSmallIcon(R.drawable.ic_drink)
         .setContentTitle(applicationContext.getString(R.string.notification_title))

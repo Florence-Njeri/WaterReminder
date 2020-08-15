@@ -17,7 +17,7 @@
     <string name="water_reminder_channel_id">water_channel</string>
     <string name="time_to_drink_water_message">Its been a long time since you drank your last cup of water. Lets do it again?</string>
     <string name="drink_water_channel_id">drink_water_channel</string>
-    <string name="drink_water_channel_name">Drink Water</string>
+    <string name="drink_water_channel_name">Drink Water Reminder</string>
     <string name="drink_water_channel_description">Drink some water</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>

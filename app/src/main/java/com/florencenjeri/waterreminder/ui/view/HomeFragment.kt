@@ -47,6 +47,9 @@ class HomeFragment : Fragment() {
             val firstLetter = settings.name.substring(0, 1).toUpperCase()
             generateProfileImage(firstLetter)
         })
+        fab.setOnClickListener {
+            //TODO
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
