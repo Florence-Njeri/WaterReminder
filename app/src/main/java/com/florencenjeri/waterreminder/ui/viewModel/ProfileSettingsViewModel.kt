@@ -80,7 +80,7 @@ class ProfileSettingsViewModel(
     }
 
     fun checkCupMeasurement() {
-        if (validator.isCupMeasurementValid()) {
+        if (validator.isGlassMeasurementValid()) {
             credentialsValidationState.value = CredentialsValidationState.CupMeasurementValid
         } else {
             credentialsValidationState.value = CredentialsValidationState.CupMeasurementInvalid

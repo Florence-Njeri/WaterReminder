@@ -14,7 +14,7 @@ interface CredentialsValidator {
     fun areCredentialsValid(): Boolean
     fun isNameValid(): Boolean
     fun isConsumptionGoalValid(): Boolean
-    fun isCupMeasurementValid(): Boolean
+    fun isGlassMeasurementValid(): Boolean
     fun isWeightValid(): Boolean
     fun isHeightValid(): Boolean
     fun isSleepingTimeValid(): Boolean
