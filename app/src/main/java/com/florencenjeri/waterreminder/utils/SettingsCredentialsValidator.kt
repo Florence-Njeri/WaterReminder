@@ -27,7 +27,7 @@ class SettingsCredentialsValidator : CredentialsValidator {
     ) {
         this.username = username
         this.waterConsumptionGoal = waterConsumptionGoal
-        this.glassMeasurements = glassMeasurements
+        this.glassMeasurements = glassMeasurement
         this.weight = weight
         this.height = height
         this.sleepingTime = sleepingTime
