@@ -20,7 +20,7 @@
             app:srcCompat="@drawable/ic_user" />
 
         <TextView
-            android:id="@+id/editTextName"
+            android:id="@+id/userName"
             style="@style/EditText"
             tools:text="Florence Njeri" />
 
@@ -44,7 +44,7 @@
             android:text="Daily water consumption goal:" />
 
         <TextView
-            android:id="@+id/editTextGoal"
+            android:id="@+id/goal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -76,7 +76,7 @@
             android:text="Size of Glass:" />
 
         <TextView
-            android:id="@+id/editTextGlassSize"
+            android:id="@+id/glassSize"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -101,7 +101,7 @@
             android:text="Sleep Shedule" />
 
         <TextView
-            android:id="@+id/startTimeButton"
+            android:id="@+id/sleepingTime"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -120,7 +120,7 @@
             android:text="to" />
 
         <TextView
-            android:id="@+id/endTimeButton"
+            android:id="@+id/wakeUpTime"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -170,7 +170,7 @@
                 android:textColor="@drawable/button_text" />
 
             <Button
-                android:id="@+id/femaleButton"
+                android:id="@+id/femaleButtonSettings"
                 style="?android:attr/borderlessButtonStyle"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
@@ -190,7 +190,7 @@
         android:background="@color/black" />
 
     <LinearLayout
-        android:id="@+id/weight"
+        android:id="@+id/weightLayout"
         style="@style/LinearLayoutEditText">
 
         <TextView
@@ -204,7 +204,7 @@
 
 
         <TextView
-            android:id="@+id/editTextWeight"
+            android:id="@+id/weight"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -219,7 +219,7 @@
         android:background="@color/black" />
 
     <LinearLayout
-        android:id="@+id/height"
+        android:id="@+id/heightLayout"
         style="@style/LinearLayoutEditText">
 
         <TextView
@@ -233,7 +233,7 @@
 
 
         <TextView
-            android:id="@+id/editTextHeight"
+            android:id="@+id/height"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -281,7 +281,7 @@
                 android:textColor="@drawable/button_text" />
 
             <Button
-                android:id="@+id/poundsUnits"
+                android:id="@+id/poundsUnitsSettings"
                 style="?android:attr/borderlessButtonStyle"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
