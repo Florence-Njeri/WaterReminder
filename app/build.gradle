@@ -66,4 +66,6 @@ dependencies {
     implementation "android.arch.navigation:navigation-fragment-ktx:1.0.0"
     implementation "com.google.android.material:material:1.2.0"
 
+    //    Image Profile text image
+    implementation 'com.amulyakhare:com.amulyakhare.textdrawable:1.0.1'
 }

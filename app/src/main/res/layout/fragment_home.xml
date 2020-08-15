@@ -6,15 +6,27 @@
     android:layout_height="match_parent"
     tools:context=".ui.view.HomeFragment">
 
+    <ImageView
+        android:id="@+id/myProfileImage"
+        style="@style/CircleImageView"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_drink" />
+
     <TextView
         android:id="@+id/welcomeTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginStart="16dp"
         android:text="@string/hello_user"
+        app:layout_constraintBottom_toBottomOf="@+id/myProfileImage"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/myProfileImage"
+        app:layout_constraintTop_toTopOf="@+id/myProfileImage" />
 
     <TextView
         android:id="@+id/goalsTextView"
@@ -25,6 +37,5 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/welcomeTextView" />
-
+        app:layout_constraintTop_toBottomOf="@+id/myProfileImage" />
 </androidx.constraintlayout.widget.ConstraintLayout>

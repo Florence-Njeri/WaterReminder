@@ -19,7 +19,7 @@
         android:id="@+id/HomeFragment"
         android:name="com.florencenjeri.waterreminder.ui.view.HomeFragment"
         android:label="@string/home_fragment_label"
-        tools:layout="@layout/fragment_second">
+        tools:layout="@layout/fragment_home">
 
         <action
             android:id="@+id/action_HomeFragment_to_settingsFragment"
