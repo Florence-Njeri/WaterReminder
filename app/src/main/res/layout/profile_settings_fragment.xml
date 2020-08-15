@@ -49,6 +49,38 @@
             android:id="@+id/editTextGoal"
             style="@style/EditText"
             android:hint="e.g. 3000ml"
+            android:imeOptions="actionNext"
+            android:inputType="number"
+            app:errorEnabled="true" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:alpha="0.3"
+        android:background="@color/black" />
+
+    <LinearLayout style="@style/LinearLayoutEditText">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginEnd="@dimen/margin"
+            android:src="@drawable/ic_drink" />
+
+        <TextView
+            android:id="@+id/glassMeasurements"
+            style="@style/TextStyleNormal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:text="Size of Glass:" />
+
+        <EditText
+            android:id="@+id/editTextGlassSize"
+            style="@style/EditText"
+            android:hint="e.g. 500ml"
             android:imeOptions="actionDone"
             android:inputType="number"
             app:errorEnabled="true" />
@@ -87,11 +119,11 @@
             style="@style/TextStyleNormal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
             android:layout_marginLeft="16dp"
             android:layout_marginTop="@dimen/margin"
             android:layout_marginRight="16dp"
             android:layout_marginBottom="16dp"
-            android:layout_gravity="center"
             android:text="to" />
 
         <Button
