@@ -1,11 +1,13 @@
 package com.florencenjeri.waterreminder.ui.view
 
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.util.Log
+import android.view.*
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
+import com.florencenjeri.waterreminder.App
 import com.florencenjeri.waterreminder.R
 import com.florencenjeri.waterreminder.ui.viewModel.HomeViewModel
 import kotlinx.android.synthetic.main.fragment_second.*
@@ -34,11 +36,28 @@ class HomeFragment : Fragment() {
             val numberOfReminders = settings.goal.toDouble() / settings.cupMeasurements.toInt()
             goalsTextView.text =
                 String.format(getString(R.string.water_consumption_goal), settings.goal)
-            String.format(getString(R.string.notification_title), settings.name)
-//            if (toGoal == 0) {
-//                homeViewModel.stopReminder()
-//            }
+            Log.d("Settings", settings.toString())
+            if (toGoal == 0) {
+                String.format(getString(R.string.notification_title), settings.name)
+                homeViewModel.stopReminder()
+            }
         })
     }
 
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        super.onCreateOptionsMenu(menu, inflater)
+        inflater.inflate(R.menu.menu_main, menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if (item.itemId == R.id.action_settings) {
+            Toast.makeText(App.getAppContext(), "Navigate!!", Toast.LENGTH_SHORT).show()
+            navigateToSettingsScreen()
+        }
+        return super.onOptionsItemSelected(item)
+    }
+
+    private fun navigateToSettingsScreen() {
+        findNavController().navigate(R.id.action_HomeFragment_to_settingsFragment)
+    }
 }

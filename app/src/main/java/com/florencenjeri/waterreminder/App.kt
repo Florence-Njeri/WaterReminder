@@ -2,7 +2,10 @@ package com.florencenjeri.waterreminder
 
 import android.app.Application
 import android.content.Context
-import androidx.work.*
+import androidx.work.ExistingPeriodicWorkPolicy
+import androidx.work.PeriodicWorkRequest
+import androidx.work.PeriodicWorkRequestBuilder
+import androidx.work.WorkManager
 import com.florencenjeri.waterreminder.database.UserSettingsDatabase
 import com.florencenjeri.waterreminder.di.applicationModule
 import com.florencenjeri.waterreminder.di.databaseModule
@@ -43,8 +46,7 @@ class App : Application() {
 
     //Background work should not delay app start
     fun scheduleWaterReminder() {
-        val constraints = buildConstraints()
-        val worker = buildWorker(constraints)
+        val worker = buildWorker()
         val workManager = WorkManager.getInstance(this)
         workManager.enqueueUniquePeriodicWork(
             ReminderWorkManager.WORKER_ID,
@@ -53,17 +55,10 @@ class App : Application() {
         )
     }
 
-    private fun buildWorker(constraints: Constraints): PeriodicWorkRequest {
-        return PeriodicWorkRequestBuilder<ReminderWorkManager>(15, TimeUnit.MINUTES)
-            .setConstraints(constraints)
+    private fun buildWorker(): PeriodicWorkRequest {
+        return PeriodicWorkRequestBuilder<ReminderWorkManager>(15, TimeUnit.SECONDS)
             .build()
 
     }
 
-    private fun buildConstraints(): Constraints {
-        val constraints = Constraints.Builder()
-            .setRequiresCharging(false)
-            .build()
-        return constraints
-    }
 }
