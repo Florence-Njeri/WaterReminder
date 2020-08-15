@@ -35,9 +35,12 @@ class HomeFragment : Fragment() {
                 String.format(getString(R.string.water_consumption_goal), settings.goal)
             Log.d("Settings", settings.toString())
             if (toGoal == 0) {
+                String.format(getString(R.string.notification_title), settings.name)
                 homeViewModel.stopReminder()
+            } else {
+                homeViewModel.setUpReminder()
             }
-            homeViewModel.setUpReminder()
+
         })
     }
 
