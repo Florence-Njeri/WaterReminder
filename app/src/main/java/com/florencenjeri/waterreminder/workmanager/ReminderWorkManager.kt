@@ -10,12 +10,10 @@ import androidx.work.CoroutineWorker
 import androidx.work.WorkerParameters
 import com.florencenjeri.waterreminder.App
 import com.florencenjeri.waterreminder.R
-import com.florencenjeri.waterreminder.repository.SettingsRepository
 
 class ReminderWorkManager(
     context: Context,
-    workerParameters: WorkerParameters,
-    val profileRepository: SettingsRepository
+    workerParameters: WorkerParameters
 ) :
     CoroutineWorker(context, workerParameters) {
     companion object {
@@ -25,7 +23,6 @@ class ReminderWorkManager(
 
     override suspend fun doWork(): Result {
         return try {
-            val settings = profileRepository.retrieveUserSettings()
             createNotification()
             Result.success()
         } catch (error: Throwable) {

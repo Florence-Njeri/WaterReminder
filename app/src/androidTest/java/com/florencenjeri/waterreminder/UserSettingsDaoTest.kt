@@ -42,6 +42,7 @@ class UserSettingsDaoTest {
                 0,
                 "Florence Njeri",
                 "3000",
+                "",
                 "2c776fa0-9c43-46c0-8f78-88eb54aa733a",
                 "https://mma.prnewswire.com/media/1219520/UNDP___SDRPY_Logo.jpg",
                 "en",
