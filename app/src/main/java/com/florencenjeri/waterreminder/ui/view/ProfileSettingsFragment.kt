@@ -54,6 +54,13 @@ class ProfileSettingsFragment : Fragment() {
             val endTime = endTimeButton.text.toString()
             val height = editTextHeight.text.trim().toString()
             val weight = editTextWeight.text.trim().toString()
+            val numOfGlasses =
+                profileSettingsViewModel.getTotalNumOfGlasses(goal.toInt(), cupMeasurement.toInt())
+            val hoursAwake = getNumOfHoursAwake(startTime, endTime)
+            val delayTime = profileSettingsViewModel.getScheduledNotificationsDelayTime(
+                hoursAwake,
+                numOfGlasses
+            )
             profileSettingsViewModel.checkCredentials(
                 name,
                 goal,
@@ -73,10 +80,32 @@ class ProfileSettingsFragment : Fragment() {
                 getSelectedGender(),
                 weight,
                 height,
-                getSelectedMeasurements()
+                getSelectedMeasurements(),
+                numOfGlasses,
+                delayTime
             )
             profileSettingsViewModel.saveUserSettings(settings)
         }
+    }
+
+    private fun getNumOfHoursAwake(
+        startTime: String,
+        endTime: String
+    ): Int {
+        val simpleDateFormat = SimpleDateFormat("HH:mm")
+        val dateMax: Date = simpleDateFormat.parse(startTime)
+        val dateMin: Date = simpleDateFormat.parse(endTime)
+        val startDate = simpleDateFormat.parse(startTime)
+        val endDate = simpleDateFormat.parse(endTime)
+
+        var difference = dateMax.time - dateMin.time
+        if (difference < 0) {
+            difference = (dateMax.time - startDate.time) + (endDate.time - dateMin.time)
+
+        }
+        val days = (difference / (1000 * 60 * 60 * 24)).toInt()
+        val hours = ((difference - 1000 * 60 * 60 * 24 * days) / (1000 * 60 * 60))
+        return hours.toInt()
     }
 
     private fun navigateToHomeScreen() {

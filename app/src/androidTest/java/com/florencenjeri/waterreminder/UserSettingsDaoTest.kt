@@ -48,7 +48,9 @@ class UserSettingsDaoTest {
                 "en",
                 "55",
                 "167",
-                "https://markets.ft.com/data/announce/detail?dockey=600-202007251404PR_NEWS_USPRX____PH73724-1"
+                "https://markets.ft.com/data/announce/detail?dockey=600-202007251404PR_NEWS_USPRX____PH73724-1",
+                10,
+                2
             )
         )
 

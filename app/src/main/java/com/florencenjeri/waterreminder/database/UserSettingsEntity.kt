@@ -26,5 +26,9 @@ data class UserSettingsEntity(
     @ColumnInfo(name = "height")
     val height: String,
     @ColumnInfo(name = "units_of_measurement")
-    val measurementUnits: String
+    val measurementUnits: String,
+    @ColumnInfo(name = "num_of_glasses")
+    val numOfGlasses: Int,
+    @ColumnInfo(name = "hours_awake")
+    val delayTime: Int
 )

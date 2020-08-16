@@ -63,6 +63,11 @@ class ProfileSettingsViewModel(
         }
     }
 
+    fun getTotalNumOfGlasses(dailyGoal: Int, glassCapacity: Int): Int = dailyGoal / glassCapacity
+
+    fun getScheduledNotificationsDelayTime(totalNumberOfHoursAwake: Int, numOfglasses: Int): Int =
+        totalNumberOfHoursAwake / numOfglasses
+
     fun checkUsername() {
         if (validator.isNameValid()) {
             credentialsValidationState.value = CredentialsValidationState.NameValid
