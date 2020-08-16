@@ -74,4 +74,64 @@
         app:cs_start_angle="120.0"
         app:layout_constraintTop_toBottomOf="@+id/goalsTextView" />
 
+    <TextView
+        android:id="@+id/textViewSummary"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:text="Summary"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/circularSeekBar" />
+
+    <LinearLayout
+        android:id="@+id/time_button_container"
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:layout_gravity="center"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/name_view_rounded_corners"
+        android:orientation="horizontal"
+        android:padding="0.5dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewSummary">
+
+        <Button
+            android:id="@+id/dailyProgressButton"
+            style="?android:attr/borderlessButtonStyle"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/button_selector"
+            android:text="Daily"
+            android:textAllCaps="false"
+            android:textColor="@drawable/button_text" />
+
+        <Button
+            android:id="@+id/weeklyProgressButton"
+            style="?android:attr/borderlessButtonStyle"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/button_selector"
+            android:text="Weekly"
+            android:textAllCaps="false"
+            android:textColor="@drawable/button_text" />
+
+        <Button
+            android:id="@+id/monthlyProgressButton"
+            style="?android:attr/borderlessButtonStyle"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/button_selector"
+            android:text="Monthly"
+            android:textAllCaps="false"
+            android:textColor="@drawable/button_text" />
+
+    </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

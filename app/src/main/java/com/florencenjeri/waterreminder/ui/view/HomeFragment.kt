@@ -38,6 +38,7 @@ class HomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         setHasOptionsMenu(true)
         homeViewModel.setUpReminder()
+        dailyProgressButton.isSelected = true
         homeViewModel.getUserSettingsData().observe(viewLifecycleOwner, Observer { settings ->
             //Initialize the global variables
             dailyGoal = settings.goal
