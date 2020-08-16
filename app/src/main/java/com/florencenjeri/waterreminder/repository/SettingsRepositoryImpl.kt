@@ -14,4 +14,10 @@ class SettingsRepositoryImpl(private val userSettingsDao: UserSettingsDao) : Set
 
     override suspend fun setUserSettings(userSettings: UserSettingsEntity) =
         userSettingsDao.setUserSettings(userSettings)
+
+    override fun retrieveUserFromWorker(): UserSettingsEntity {
+        return userSettingsDao.retrieveUserFromWorker()
+    }
+
+
 }

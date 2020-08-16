@@ -1,15 +1,11 @@
 package com.florencenjeri.waterreminder.ui.view
 
-import android.graphics.Color
-import android.graphics.Typeface
 import android.os.Bundle
 import android.util.Log
 import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
-import com.amulyakhare.textdrawable.TextDrawable
-import com.amulyakhare.textdrawable.util.ColorGenerator
 import com.florencenjeri.waterreminder.R
 import com.florencenjeri.waterreminder.ui.viewModel.HomeViewModel
 import kotlinx.android.synthetic.main.fragment_home.*
@@ -52,7 +48,9 @@ class HomeFragment : Fragment() {
             }
 
             val firstLetter = settings.name.substring(0, 1).toUpperCase()
-            generateProfileImage(firstLetter)
+            val drawable = homeViewModel.generateProfileImage(firstLetter)
+            myProfileImage.setImageDrawable(drawable)
+
             setUpCircularSeekbar()
             goalsTextView.text =
                 String.format(
@@ -65,12 +63,15 @@ class HomeFragment : Fragment() {
             //TODO : Increase the capacity of water consumed that day
             dailyProgressAchieved++
             Log.d("Progress", dailyProgressAchieved.toString())
-            setUpCircularSeekbar()
             goalsTextView.text =
                 String.format(
                     getString(R.string.water_consumption_goal),
                     dailyGoal - dailyProgressAchieved
                 )
+            //TODO : Fix this bug
+            if (dailyProgressAchieved > 0) {
+                setUpCircularSeekbar()
+            }
         }
     }
 
@@ -92,24 +93,6 @@ class HomeFragment : Fragment() {
         val action =
             HomeFragmentDirections.actionHomeFragmentToSettingsFragment(userId)
         findNavController().navigate(action)
-    }
-
-    private fun generateProfileImage(firstLetter: String?) {
-
-        //        binding.myProfileImage.setImageDrawable(drawable)
-        var generator: ColorGenerator = ColorGenerator.MATERIAL // or use DEFAULT
-        // generate random color
-        val color1: Int = generator.randomColor
-        val drawable = TextDrawable.builder()
-            .beginConfig()
-            .textColor(Color.WHITE)
-            .useFont(Typeface.DEFAULT)
-            .fontSize(60) /* size in px */
-            .bold()
-            .toUpperCase()
-            .endConfig()
-            .buildRoundRect(firstLetter, color1, 100)
-        myProfileImage.setImageDrawable(drawable)
     }
 
     private fun setUpCircularSeekbar() {

@@ -9,7 +9,7 @@ import org.koin.dsl.module
 val presenterModule = module {
     scope<ProfileSettingsFragment> {
         viewModel {
-            ProfileSettingsViewModel(get(), get(), get())
+            ProfileSettingsViewModel(get(), get(), get(), get())
         }
     }
     viewModel { HomeViewModel(get(), get()) }

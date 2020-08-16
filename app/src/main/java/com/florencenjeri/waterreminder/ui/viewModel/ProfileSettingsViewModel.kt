@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.florencenjeri.waterreminder.database.UserSettingsEntity
+import com.florencenjeri.waterreminder.prefs.UserPrefsManager
 import com.florencenjeri.waterreminder.repository.SettingsRepository
 import com.florencenjeri.waterreminder.repository.UserRepository
 import com.florencenjeri.waterreminder.utils.CredentialsValidator
@@ -14,7 +15,8 @@ import kotlinx.coroutines.launch
 class ProfileSettingsViewModel(
     val settingsRepository: SettingsRepository,
     val validator: CredentialsValidator,
-    val userRepository: UserRepository
+    val userRepository: UserRepository,
+    private val sharedPreferenceManager: UserPrefsManager
 ) : ViewModel() {
     private val credentialsValidationState = MutableLiveData<CredentialsValidationState>()
 
@@ -30,6 +32,10 @@ class ProfileSettingsViewModel(
         if (userRepository.areProfileSettingsConfigured()) {
             credentialsValidationState.value = CredentialsValidationState.UserSettingsConfigured
         }
+    }
+
+    fun storeDelayTime(time: Long) {
+        sharedPreferenceManager.storeRepeatIntervalTime(time)
     }
 
     fun checkCredentials(

@@ -7,4 +7,5 @@ interface SettingsRepository {
     fun retrieveUserSettings(): LiveData<UserSettingsEntity>
     fun getUser(id: Long): LiveData<UserSettingsEntity>
     suspend fun setUserSettings(userSettings: UserSettingsEntity)
+    fun retrieveUserFromWorker(): UserSettingsEntity
 }

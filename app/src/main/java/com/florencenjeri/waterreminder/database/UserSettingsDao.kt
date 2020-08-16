@@ -17,4 +17,7 @@ interface UserSettingsDao {
     @Query("SELECT * FROM user_settings WHERE id = :id")
     fun getUser(id: Long): LiveData<UserSettingsEntity>
 
+    @Query("SELECT * FROM user_settings")
+    fun retrieveUserFromWorker(): UserSettingsEntity
+
 }

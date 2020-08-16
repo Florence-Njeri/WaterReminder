@@ -85,6 +85,7 @@ class ProfileSettingsFragment : Fragment() {
                 delayTime
             )
             profileSettingsViewModel.saveUserSettings(settings)
+            profileSettingsViewModel.storeDelayTime(delayTime.toLong())
         }
     }
 
