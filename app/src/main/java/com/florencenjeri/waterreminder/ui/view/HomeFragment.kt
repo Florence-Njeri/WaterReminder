@@ -50,8 +50,6 @@ class HomeFragment : Fragment() {
             val firstLetter = settings.name.substring(0, 1).toUpperCase()
             val drawable = homeViewModel.generateProfileImage(firstLetter)
             myProfileImage.setImageDrawable(drawable)
-
-            setUpCircularSeekbar()
             goalsTextView.text =
                 String.format(
                     getString(R.string.water_consumption_goal),
@@ -63,14 +61,15 @@ class HomeFragment : Fragment() {
             //TODO : Increase the capacity of water consumed that day
             dailyProgressAchieved++
             Log.d("Progress", dailyProgressAchieved.toString())
-            goalsTextView.text =
-                String.format(
-                    getString(R.string.water_consumption_goal),
-                    dailyGoal - dailyProgressAchieved
-                )
+
             //TODO : Fix this bug
-            if (dailyProgressAchieved > 0) {
+            if (dailyGoal - dailyProgressAchieved >= 0) {
                 setUpCircularSeekbar()
+                goalsTextView.text =
+                    String.format(
+                        getString(R.string.water_consumption_goal),
+                        dailyGoal - dailyProgressAchieved
+                    )
             }
         }
     }
