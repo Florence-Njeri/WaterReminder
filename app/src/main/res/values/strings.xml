@@ -12,7 +12,7 @@
     <string name="male">Male</string>
     <string name="female">Female</string>
     <string name="hello_user">Hello, %1$s</string>
-    <string name="water_consumption_goal">You are %1$s from your goal</string>
+    <string name="water_consumption_goal">You are %1$s ml from your goal</string>
     <string name="notification_title">"Time to drink water, %1$s"</string>
     <string name="water_reminder_channel_id">water_channel</string>
     <string name="time_to_drink_water_message">Its been a long time since you drank your last cup of water. Lets do it again?</string>

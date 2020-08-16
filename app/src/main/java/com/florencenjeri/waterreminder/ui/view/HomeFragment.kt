@@ -13,7 +13,9 @@ import com.amulyakhare.textdrawable.util.ColorGenerator
 import com.florencenjeri.waterreminder.R
 import com.florencenjeri.waterreminder.ui.viewModel.HomeViewModel
 import kotlinx.android.synthetic.main.fragment_home.*
+import me.tankery.lib.circularseekbar.CircularSeekBar
 import org.koin.android.viewmodel.ext.android.viewModel
+
 
 /**
  * A simple [Fragment] subclass as the second destination in the navigation.
@@ -21,6 +23,9 @@ import org.koin.android.viewmodel.ext.android.viewModel
 class HomeFragment : Fragment() {
     val homeViewModel: HomeViewModel by viewModel()
     private var userId: Long = 1
+    var dailyGoal: Int = 0
+    var dailyProgressAchieved: Int = 0
+    var glassCapacity: Int = 0
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -34,25 +39,34 @@ class HomeFragment : Fragment() {
         setHasOptionsMenu(true)
         homeViewModel.setUpReminder()
         homeViewModel.getUserSettingsData().observe(viewLifecycleOwner, Observer { settings ->
+            //Initialize the global variables
+            dailyGoal = settings.goal.toInt()
+            glassCapacity = settings.cupMeasurements.toInt()
             userId = settings.id
             welcomeTextView.text = String.format(getString(R.string.hello_user), settings.name)
-            val toGoal = settings.goal.toInt() - settings.cupMeasurements.toInt()
-            val numberOfReminders = settings.goal.toDouble() / settings.cupMeasurements.toInt()
-            goalsTextView.text =
-                String.format(getString(R.string.water_consumption_goal), settings.goal)
             String.format(getString(R.string.notification_title), settings.name)
+            goalsTextView.text =
+                String.format(
+                    getString(R.string.water_consumption_goal),
+                    dailyGoal
+                )
+            val numberOfReminders = settings.goal.toDouble() / settings.cupMeasurements.toInt()
             Log.d("Settings", settings.toString())
-            if (toGoal == 0) {
+            if (checkWaterConsumptionGoalAchieved()) {
                 homeViewModel.stopReminder()
             }
 
             val firstLetter = settings.name.substring(0, 1).toUpperCase()
             generateProfileImage(firstLetter)
+            setUpCircularSeekbar()
         })
         fab.setOnClickListener {
-            //TODO
+            //TODO : Increase the capacity of water consumed that day
+            dailyProgressAchieved += glassCapacity
         }
     }
+
+    fun checkWaterConsumptionGoalAchieved(): Boolean = dailyProgressAchieved == dailyGoal
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         super.onCreateOptionsMenu(menu, inflater)
@@ -88,5 +102,32 @@ class HomeFragment : Fragment() {
             .endConfig()
             .buildRoundRect(firstLetter, color1, 100)
         myProfileImage.setImageDrawable(drawable)
+    }
+
+    private fun setUpCircularSeekbar() {
+        circularSeekBar.max = dailyGoal.toFloat()
+        circularSeekBar.progress = dailyProgressAchieved.toFloat()
+
+        circularSeekBar.setOnSeekBarChangeListener(object :
+            CircularSeekBar.OnCircularSeekBarChangeListener {
+            override fun onProgressChanged(
+                circularSeekBar: CircularSeekBar?,
+                progress: Float,
+                fromUser: Boolean
+            ) {
+                //On fab clicked, update the progress bar
+                circularSeekBar?.progress = dailyProgressAchieved.toFloat()
+            }
+
+            override fun onStartTrackingTouch(seekBar: CircularSeekBar?) {
+                TODO("Not yet implemented")
+            }
+
+            override fun onStopTrackingTouch(seekBar: CircularSeekBar?) {
+                TODO("Not yet implemented")
+            }
+
+
+        })
     }
 }
