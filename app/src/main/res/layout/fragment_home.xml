@@ -60,15 +60,18 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="24dp"
         android:layout_marginEnd="16dp"
-        app:cs_circle_color="#0000ff"
-        app:cs_circle_progress_color="#ff0000"
-        app:cs_circle_stroke_width="4dp"
-        app:cs_circle_style="round"
+        app:cs_circle_color="@android:color/darker_gray"
+        app:cs_circle_progress_color="@color/colorPrimary"
+        app:cs_circle_stroke_width="8dp"
+        app:cs_circle_style="butt"
         app:cs_disable_pointer="true"
         app:cs_disable_progress_glow="true"
-        app:cs_hide_progress_when_empty="true"
+        app:cs_end_angle="420.0"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        app:cs_hide_progress_when_empty="false"
+        app:cs_maintain_equal_circle="false"
+        app:cs_start_angle="120.0"
         app:layout_constraintTop_toBottomOf="@+id/goalsTextView" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -23,9 +23,9 @@ import org.koin.android.viewmodel.ext.android.viewModel
 class HomeFragment : Fragment() {
     val homeViewModel: HomeViewModel by viewModel()
     private var userId: Long = 1
-    var dailyGoal: Int = 0
+    private lateinit var dailyGoal: String
     var dailyProgressAchieved: Int = 0
-    var glassCapacity: Int = 0
+    lateinit var glassCapacity: String
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -40,16 +40,11 @@ class HomeFragment : Fragment() {
         homeViewModel.setUpReminder()
         homeViewModel.getUserSettingsData().observe(viewLifecycleOwner, Observer { settings ->
             //Initialize the global variables
-            dailyGoal = settings.goal.toInt()
-            glassCapacity = settings.cupMeasurements.toInt()
+            dailyGoal = settings.goal
+            glassCapacity = settings.cupMeasurements
             userId = settings.id
             welcomeTextView.text = String.format(getString(R.string.hello_user), settings.name)
             String.format(getString(R.string.notification_title), settings.name)
-            goalsTextView.text =
-                String.format(
-                    getString(R.string.water_consumption_goal),
-                    dailyGoal
-                )
             val numberOfReminders = settings.goal.toDouble() / settings.cupMeasurements.toInt()
             Log.d("Settings", settings.toString())
             if (checkWaterConsumptionGoalAchieved()) {
@@ -59,14 +54,27 @@ class HomeFragment : Fragment() {
             val firstLetter = settings.name.substring(0, 1).toUpperCase()
             generateProfileImage(firstLetter)
             setUpCircularSeekbar()
+            goalsTextView.text =
+                String.format(
+                    getString(R.string.water_consumption_goal),
+                    dailyGoal.toInt() - dailyProgressAchieved
+                )
         })
+
         fab.setOnClickListener {
             //TODO : Increase the capacity of water consumed that day
-            dailyProgressAchieved += glassCapacity
+            dailyProgressAchieved += glassCapacity.toInt()
+            Log.d("Progress", dailyProgressAchieved.toString())
+            setUpCircularSeekbar()
+            goalsTextView.text =
+                String.format(
+                    getString(R.string.water_consumption_goal),
+                    dailyGoal.toInt() - dailyProgressAchieved
+                )
         }
     }
 
-    fun checkWaterConsumptionGoalAchieved(): Boolean = dailyProgressAchieved == dailyGoal
+    fun checkWaterConsumptionGoalAchieved(): Boolean = dailyProgressAchieved == dailyGoal.toInt()
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         super.onCreateOptionsMenu(menu, inflater)
