@@ -92,6 +92,11 @@ class ProfileSettingsFragment : Fragment() {
         startTime: String,
         endTime: String
     ): Int {
+        /**
+         * startTime - e.g 21:00
+         * endTime -  e.g 04:00
+         * expected to return 17
+         */
         val simpleDateFormat = SimpleDateFormat("HH:mm")
         val dateMax: Date = simpleDateFormat.parse(startTime)
         val dateMin: Date = simpleDateFormat.parse(endTime)

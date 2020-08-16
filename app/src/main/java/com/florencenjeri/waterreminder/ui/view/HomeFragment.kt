@@ -23,7 +23,7 @@ import org.koin.android.viewmodel.ext.android.viewModel
 class HomeFragment : Fragment() {
     val homeViewModel: HomeViewModel by viewModel()
     private var userId: Long = 1
-    private lateinit var dailyGoal: String
+    var dailyGoal: Int = 0
     var dailyProgressAchieved: Int = 0
     lateinit var glassCapacity: String
     override fun onCreateView(
@@ -41,12 +41,11 @@ class HomeFragment : Fragment() {
         dailyProgressButton.isSelected = true
         homeViewModel.getUserSettingsData().observe(viewLifecycleOwner, Observer { settings ->
             //Initialize the global variables
-            dailyGoal = settings.goal
+            dailyGoal = settings.numOfGlasses
             glassCapacity = settings.cupMeasurements
             userId = settings.id
             welcomeTextView.text = String.format(getString(R.string.hello_user), settings.name)
             String.format(getString(R.string.notification_title), settings.name)
-            val numberOfReminders = settings.goal.toDouble() / settings.cupMeasurements.toInt()
             Log.d("Settings", settings.toString())
             if (checkWaterConsumptionGoalAchieved()) {
                 homeViewModel.stopReminder()
@@ -58,19 +57,19 @@ class HomeFragment : Fragment() {
             goalsTextView.text =
                 String.format(
                     getString(R.string.water_consumption_goal),
-                    dailyGoal.toInt() - dailyProgressAchieved
+                    dailyGoal - dailyProgressAchieved
                 )
         })
 
         fab.setOnClickListener {
             //TODO : Increase the capacity of water consumed that day
-            dailyProgressAchieved += glassCapacity.toInt()
+            dailyProgressAchieved++
             Log.d("Progress", dailyProgressAchieved.toString())
             setUpCircularSeekbar()
             goalsTextView.text =
                 String.format(
                     getString(R.string.water_consumption_goal),
-                    dailyGoal.toInt() - dailyProgressAchieved
+                    dailyGoal - dailyProgressAchieved
                 )
         }
     }
