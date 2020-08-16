@@ -49,7 +49,7 @@ class ProfileSettingsFragment : Fragment() {
         saveButton.setOnClickListener {
             val name = editTextName.text.trim().toString()
             val goal = editTextGoal.text.trim().toString()
-            val cupMeasurement = editTextGoal.text.trim().toString()
+            val cupMeasurement = editTextGlassSize.text.trim().toString()
             val startTime = startTimeButton.text.toString()
             val endTime = endTimeButton.text.toString()
             val height = editTextHeight.text.trim().toString()
@@ -71,8 +71,8 @@ class ProfileSettingsFragment : Fragment() {
                 startTime,
                 endTime,
                 getSelectedGender(),
-                height,
                 weight,
+                height,
                 getSelectedMeasurements()
             )
             profileSettingsViewModel.saveUserSettings(settings)

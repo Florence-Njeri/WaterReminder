@@ -3,6 +3,7 @@ package com.florencenjeri.waterreminder.ui.view
 import android.graphics.Color
 import android.graphics.Typeface
 import android.os.Bundle
+import android.util.Log
 import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -25,13 +26,13 @@ class HomeFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        homeViewModel.setUpReminder()
         return inflater.inflate(R.layout.fragment_home, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setHasOptionsMenu(true)
+        homeViewModel.setUpReminder()
         homeViewModel.getUserSettingsData().observe(viewLifecycleOwner, Observer { settings ->
             userId = settings.id
             welcomeTextView.text = String.format(getString(R.string.hello_user), settings.name)
@@ -40,6 +41,7 @@ class HomeFragment : Fragment() {
             goalsTextView.text =
                 String.format(getString(R.string.water_consumption_goal), settings.goal)
             String.format(getString(R.string.notification_title), settings.name)
+            Log.d("Settings", settings.toString())
             if (toGoal == 0) {
                 homeViewModel.stopReminder()
             }

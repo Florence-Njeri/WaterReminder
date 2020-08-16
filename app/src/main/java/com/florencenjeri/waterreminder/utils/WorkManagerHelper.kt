@@ -1,14 +1,16 @@
 package com.florencenjeri.waterreminder.utils
 
-import androidx.work.*
+import androidx.work.ExistingPeriodicWorkPolicy
+import androidx.work.PeriodicWorkRequest
+import androidx.work.PeriodicWorkRequestBuilder
+import androidx.work.WorkManager
 import com.florencenjeri.waterreminder.workmanager.ReminderWorkManager
 import java.util.concurrent.TimeUnit
 
 open class WorkManagerHelper(private val workManager: WorkManager) {
     //Background work should not delay app start
     fun scheduleWaterReminder() {
-        val constraints = buildConstraints()
-        val worker = buildWorker(constraints)
+        val worker = buildWorker()
         workManager.enqueueUniquePeriodicWork(
             ReminderWorkManager.WORKER_ID,
             ExistingPeriodicWorkPolicy.KEEP,
@@ -16,19 +18,10 @@ open class WorkManagerHelper(private val workManager: WorkManager) {
         )
     }
 
-    private fun buildWorker(constraints: Constraints): PeriodicWorkRequest {
-        return PeriodicWorkRequestBuilder<ReminderWorkManager>(15, TimeUnit.SECONDS)
-            .setConstraints(constraints)
+    private fun buildWorker(): PeriodicWorkRequest {
+        return PeriodicWorkRequestBuilder<ReminderWorkManager>(15, TimeUnit.MINUTES)
             .build()
 
-    }
-
-    private fun buildConstraints(): Constraints {
-        val constraints = Constraints.Builder()
-            .setRequiresStorageNotLow(true)
-            .setRequiresBatteryNotLow(true)
-            .build()
-        return constraints
     }
 
     fun stopReminder() {
