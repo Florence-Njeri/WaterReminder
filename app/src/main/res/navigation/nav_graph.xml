@@ -23,12 +23,12 @@
 
         <action
             android:id="@+id/action_HomeFragment_to_settingsFragment"
-            app:destination="@id/settingsFragment" />
+            app:destination="@id/userProfileFragment" />
     </fragment>
     <fragment
-        android:id="@+id/settingsFragment"
-        android:name="com.florencenjeri.waterreminder.ui.view.SettingsFragment"
-        android:label="SettingsFragment">
+        android:id="@+id/userProfileFragment"
+        android:name="com.florencenjeri.waterreminder.ui.view.UserProfileFragment"
+        android:label="UserProfileFragment">
         <action
             android:id="@+id/action_settingsFragment_to_HomeFragment"
             app:destination="@id/HomeFragment" />
