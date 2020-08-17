@@ -13,7 +13,10 @@
 
         <action
             android:id="@+id/action_ProfileSettingsFragment_to_HomeFragment"
-            app:destination="@id/HomeFragment" />
+            app:destination="@id/HomeFragment"
+            app:launchSingleTop="true"
+            app:popUpTo="@+id/nav_graph"
+            app:popUpToInclusive="true" />
     </fragment>
     <fragment
         android:id="@+id/HomeFragment"

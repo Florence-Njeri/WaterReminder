@@ -121,7 +121,7 @@ class ProfileSettingsFragment : Fragment() {
     }
 
     private fun navigateToHomeScreen() {
-        findNavController().navigate(R.id.action_ProfileSettingsFragment_to_HomeFragment)
+        findNavController().navigate(ProfileSettingsFragmentDirections.actionProfileSettingsFragmentToHomeFragment())
     }
 
     fun susbscribeToData() {
