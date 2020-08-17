@@ -81,7 +81,7 @@ class HomeFragment : Fragment() {
         }
     }
 
-    fun checkWaterConsumptionGoalAchieved(): Boolean = dailyProgressAchieved == dailyGoal.toInt()
+    fun checkWaterConsumptionGoalAchieved(): Boolean = dailyProgressAchieved == dailyGoal
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         super.onCreateOptionsMenu(menu, inflater)
@@ -89,7 +89,7 @@ class HomeFragment : Fragment() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        if (item.itemId == R.id.action_settings) {
+        if (item.itemId == R.id.userProfileFragment) {
             navigateToSettingsScreen()
         }
         return super.onOptionsItemSelected(item)
@@ -145,4 +145,5 @@ class HomeFragment : Fragment() {
         val forward = MaterialSharedAxis(MaterialSharedAxis.Z, true)
         exitTransition = forward
     }
+
 }
