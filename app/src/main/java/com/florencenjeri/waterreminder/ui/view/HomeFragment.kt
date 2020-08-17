@@ -11,6 +11,7 @@ import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.florencenjeri.waterreminder.R
 import com.florencenjeri.waterreminder.ui.viewModel.HomeViewModel
+import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.transition.MaterialSharedAxis
 import kotlinx.android.synthetic.main.fragment_home.*
 import me.tankery.lib.circularseekbar.CircularSeekBar
@@ -69,24 +70,38 @@ class HomeFragment : Fragment() {
         })
 
         fab.setOnClickListener {
-            //TODO : Increase the capacity of water consumed that day
-            dailyProgressAchieved++
-            Log.d("Progress", dailyProgressAchieved.toString())
+            setWaterDrankOnFabClick()
+        }
+        //Show new user a SnackBar
+        if (!homeViewModel.checkIfUserIsOnboarded()) {
+            Snackbar.make(
+                coordinator,
+                R.string.track_water,
+                Snackbar.LENGTH_SHORT
+            ).show()
+            homeViewModel.setUserOnboardedToTrue()
+        }
 
-            //TODO : Fix this bug
-            if (dailyGoal - dailyProgressAchieved >= 0) {
-                setUpCircularSeekbar()
-                val goalText = String.format(
-                    getString(R.string.water_consumption_goal),
-                    dailyGoal - dailyProgressAchieved
-                )
-                val styledText: CharSequence = Html.fromHtml(goalText)
-                goalsTextView.text = styledText
-            }
-            if (dailyGoal - dailyProgressAchieved == 0) {
-                goalsTextView.visibility = GONE
-                textViewGoalComplete.visibility = VISIBLE
-            }
+    }
+
+    private fun setWaterDrankOnFabClick() {
+        //TODO : Increase the capacity of water consumed that day
+        dailyProgressAchieved++
+        Log.d("Progress", dailyProgressAchieved.toString())
+
+        //TODO : Fix this bug
+        if (dailyGoal - dailyProgressAchieved >= 0) {
+            setUpCircularSeekbar()
+            val goalText = String.format(
+                getString(R.string.water_consumption_goal),
+                dailyGoal - dailyProgressAchieved
+            )
+            val styledText: CharSequence = Html.fromHtml(goalText)
+            goalsTextView.text = styledText
+        }
+        if (dailyGoal - dailyProgressAchieved == 0) {
+            goalsTextView.visibility = GONE
+            textViewGoalComplete.visibility = VISIBLE
         }
     }
 

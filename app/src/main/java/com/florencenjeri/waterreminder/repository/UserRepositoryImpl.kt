@@ -9,4 +9,9 @@ class UserRepositoryImpl(private val sharedPreferenceManager: UserPrefsManager) 
 
     override fun configuredUserSettings(isConfigured: Boolean) =
         sharedPreferenceManager.setUserSettingsConfig(isConfigured)
+
+    override fun isUserOnboard(): Boolean = sharedPreferenceManager.isUserOnboarded()
+
+    override fun setUserOnboarded(isUserOnboard: Boolean) =
+        sharedPreferenceManager.setUserOnboarded(isUserOnboard)
 }

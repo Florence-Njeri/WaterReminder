@@ -10,11 +10,13 @@ import com.amulyakhare.textdrawable.TextDrawable
 import com.amulyakhare.textdrawable.util.ColorGenerator
 import com.florencenjeri.waterreminder.database.UserSettingsEntity
 import com.florencenjeri.waterreminder.repository.SettingsRepository
+import com.florencenjeri.waterreminder.repository.UserRepository
 import com.florencenjeri.waterreminder.utils.WorkManagerHelper
 
 class HomeViewModel(
     val settingsRepository: SettingsRepository,
-    val workManagerHelper: WorkManagerHelper
+    val workManagerHelper: WorkManagerHelper,
+    val userRepository: UserRepository
 ) : ViewModel() {
     val profileSettings = MutableLiveData<UserSettingsEntity>()
     fun getProfileSettings(): LiveData<UserSettingsEntity> = profileSettings
@@ -29,6 +31,10 @@ class HomeViewModel(
     fun stopReminder() {
         workManagerHelper.stopReminder()
     }
+
+    fun checkIfUserIsOnboarded() = userRepository.isUserOnboard()
+
+    fun setUserOnboardedToTrue() = userRepository.setUserOnboarded(true)
 
     fun generateProfileImage(firstLetter: String?): Drawable {
         val generator: ColorGenerator = ColorGenerator.MATERIAL // or use DEFAULT
