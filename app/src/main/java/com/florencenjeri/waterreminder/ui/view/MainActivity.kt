@@ -22,7 +22,8 @@ class MainActivity : AppCompatActivity() {
         val navController = navHostFragment.navController
         val appBarConfiguration = AppBarConfiguration
             .Builder(
-                R.id.HomeFragment
+                R.id.HomeFragment,
+                R.id.ProfileSettingsFragment
             )
             .build()
 

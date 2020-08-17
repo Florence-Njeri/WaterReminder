@@ -10,44 +10,19 @@ import androidx.work.CoroutineWorker
 import androidx.work.WorkerParameters
 import com.florencenjeri.waterreminder.App
 import com.florencenjeri.waterreminder.R
-import com.florencenjeri.waterreminder.repository.SettingsRepository
 
 
 class ReminderWorkManager(
     context: Context,
-    workerParameters: WorkerParameters,
-    private val repository: SettingsRepository
+    workerParameters: WorkerParameters
 ) :
     CoroutineWorker(context, workerParameters) {
-    private val TAG_OUTPUT: String = "Interval"
-
     companion object {
         const val WORKER_ID = "WaterReminderWorkerID"
         val app = App.getAppContext()
     }
 
     override suspend fun doWork(): Result {
-        val settings = repository.retrieveUserFromWorker()
-//        val wakeUpTime = settings.endTime // 4 AM
-//        val dueDate = Calendar.getInstance()
-//        val currentDate = Calendar.getInstance()
-//        // Set Execution around the users wake up time e.g 4 AM
-//        dueDate.set(Calendar.HOUR_OF_DAY, wakeUpTime.toInt())
-//        dueDate.set(Calendar.MINUTE, 0)
-//        dueDate.set(Calendar.SECOND, 0)
-//        if (dueDate.before(currentDate)) {
-//            dueDate.add(Calendar.HOUR_OF_DAY, 24)
-//        }
-//
-//        val timeDiff = dueDate.timeInMillis.minus(currentDate.timeInMillis)
-//        Log.d("TimeDiff", timeDiff.toString())
-//        val dailyWorkRequest = OneTimeWorkRequestBuilder<ReminderWorkManager>()
-//            .setInitialDelay(timeDiff, TimeUnit.MILLISECONDS)
-//            .addTag(TAG_OUTPUT)
-//            .build()
-//        WorkManager.getInstance(applicationContext)
-//            .enqueue(dailyWorkRequest)
-
         return try {
             createNotification()
             Result.success()

@@ -20,7 +20,7 @@
             style="@style/LinearLayoutEditText">
 
             <ImageView
-                android:id="@+id/image_name"
+                android:id="@+id/userProfileImage"
                 style="@style/ImageStyle"
                 android:contentDescription="Name Icon"
                 app:srcCompat="@drawable/ic_user" />

@@ -20,6 +20,6 @@ val applicationModule = module {
     //WorkManager
     single { WorkManager.getInstance(get()) }
     single { WorkManagerHelper(get()) }
-    single { ReminderWorkManager(androidContext(), get(), get()) }
+    single { ReminderWorkManager(androidContext(), get()) }
 }
 private const val USER_PREFS = ""

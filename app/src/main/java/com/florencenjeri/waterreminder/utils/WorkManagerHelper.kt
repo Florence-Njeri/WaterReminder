@@ -7,11 +7,8 @@ import androidx.work.WorkManager
 import com.florencenjeri.waterreminder.workmanager.ReminderWorkManager
 import java.util.concurrent.TimeUnit
 
-open class WorkManagerHelper(
-    private val workManager: WorkManager
-) {
+open class WorkManagerHelper(private val workManager: WorkManager) {
     //Background work should not delay app start
-
     fun scheduleWaterReminder() {
         val worker = buildWorker()
         workManager.enqueueUniquePeriodicWork(
@@ -22,12 +19,9 @@ open class WorkManagerHelper(
     }
 
     private fun buildWorker(): PeriodicWorkRequest {
-//        val delayTime = prefs.getLong(UserPrefsManager.TIME_DELAY_PREFS, 0)
-//        Log.d("SettingsDelayTimeWorker", delayTime.toString())
-        return PeriodicWorkRequestBuilder<ReminderWorkManager>(
-            15,
-            TimeUnit.MINUTES
-        ).build()
+        return PeriodicWorkRequestBuilder<ReminderWorkManager>(15, TimeUnit.MINUTES)
+            .build()
+
     }
 
     fun stopReminder() {

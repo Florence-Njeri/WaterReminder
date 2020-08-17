@@ -36,6 +36,9 @@ class UserProfileFragment : Fragment() {
                 )
             homeViewModel.getUserById(safeArgs.userId)
                 .observe(viewLifecycleOwner, Observer { settings ->
+                    val firstLetter = settings.name.substring(0, 1).toUpperCase()
+                    val profileDrawable = homeViewModel.generateProfileImage(firstLetter)
+                    userProfileImage.setImageDrawable(profileDrawable)
                     userName.text = settings.name
                     goal.text = settings.goal
                     glassSize.text = settings.cupMeasurements
