@@ -4,6 +4,8 @@ import android.os.Bundle
 import android.text.Html
 import android.util.Log
 import android.view.*
+import android.view.View.GONE
+import android.view.View.VISIBLE
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
@@ -80,6 +82,10 @@ class HomeFragment : Fragment() {
                 )
                 val styledText: CharSequence = Html.fromHtml(goalText)
                 goalsTextView.text = styledText
+            }
+            if (dailyGoal - dailyProgressAchieved == 0) {
+                goalsTextView.visibility = GONE
+                textViewGoalComplete.visibility = VISIBLE
             }
         }
     }

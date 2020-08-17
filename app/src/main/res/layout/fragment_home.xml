@@ -33,11 +33,12 @@
 
     <TextView
         android:id="@+id/goalsTextView"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:textColor="@color/black"
+        android:layout_marginEnd="16dp"
         android:text="@string/water_consumption_goal"
+        android:textColor="@color/black"
         android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -65,7 +66,7 @@
         android:layout_width="120dp"
         android:layout_height="120dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
         app:cs_circle_color="@android:color/darker_gray"
         app:cs_circle_progress_color="@color/colorAccent"
@@ -79,7 +80,7 @@
         app:cs_start_angle="120.0"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/goalsTextView" />
+        app:layout_constraintTop_toBottomOf="@+id/textViewGoalComplete" />
 
     <TextView
         android:id="@+id/textViewSummary"
@@ -143,4 +144,18 @@
             android:textColor="@drawable/button_text" />
 
     </LinearLayout>
+
+    <TextView
+        android:id="@+id/textViewGoalComplete"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Today's goal is complete. See you tomorrow!!"
+        android:textAllCaps="true"
+        android:textColor="@color/colorPrimaryDark"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="@+id/goalsTextView"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/goalsTextView"
+        app:layout_constraintTop_toBottomOf="@+id/goalsTextView" />
 </androidx.constraintlayout.widget.ConstraintLayout>

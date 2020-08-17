@@ -2,11 +2,13 @@ package com.florencenjeri.waterreminder
 
 import android.app.Application
 import android.content.Context
+import androidx.work.WorkManager
 import com.florencenjeri.waterreminder.database.UserSettingsDatabase
 import com.florencenjeri.waterreminder.di.applicationModule
 import com.florencenjeri.waterreminder.di.databaseModule
 import com.florencenjeri.waterreminder.di.presenterModule
 import com.florencenjeri.waterreminder.di.repositoryModule
+import com.florencenjeri.waterreminder.utils.WorkManagerHelper
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.core.context.startKoin
@@ -35,5 +37,6 @@ class App : Application() {
                 presenterModule, databaseModule, applicationModule, repositoryModule
             )
         }
+        WorkManagerHelper(WorkManager.getInstance(this)).scheduleWaterReminder()
     }
 }
