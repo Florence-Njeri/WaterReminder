@@ -5,17 +5,12 @@ import android.app.NotificationManager
 import android.content.Context
 import android.graphics.Color
 import android.os.Build
-import android.util.Log
 import androidx.core.content.ContextCompat
 import androidx.work.CoroutineWorker
-import androidx.work.OneTimeWorkRequestBuilder
-import androidx.work.WorkManager
 import androidx.work.WorkerParameters
 import com.florencenjeri.waterreminder.App
 import com.florencenjeri.waterreminder.R
 import com.florencenjeri.waterreminder.repository.SettingsRepository
-import java.util.*
-import java.util.concurrent.TimeUnit
 
 
 class ReminderWorkManager(
@@ -33,25 +28,25 @@ class ReminderWorkManager(
 
     override suspend fun doWork(): Result {
         val settings = repository.retrieveUserFromWorker()
-        val wakeUpTime = settings.endTime // 4 AM
-        val dueDate = Calendar.getInstance()
-        val currentDate = Calendar.getInstance()
-        // Set Execution around the users wake up time e.g 4 AM
-        dueDate.set(Calendar.HOUR_OF_DAY, wakeUpTime.toInt())
-        dueDate.set(Calendar.MINUTE, 0)
-        dueDate.set(Calendar.SECOND, 0)
-        if (dueDate.before(currentDate)) {
-            dueDate.add(Calendar.HOUR_OF_DAY, 24)
-        }
-
-        val timeDiff = dueDate.timeInMillis.minus(currentDate.timeInMillis)
-        Log.d("TimeDiff", timeDiff.toString())
-        val dailyWorkRequest = OneTimeWorkRequestBuilder<ReminderWorkManager>()
-            .setInitialDelay(timeDiff, TimeUnit.MILLISECONDS)
-            .addTag(TAG_OUTPUT)
-            .build()
-        WorkManager.getInstance(applicationContext)
-            .enqueue(dailyWorkRequest)
+//        val wakeUpTime = settings.endTime // 4 AM
+//        val dueDate = Calendar.getInstance()
+//        val currentDate = Calendar.getInstance()
+//        // Set Execution around the users wake up time e.g 4 AM
+//        dueDate.set(Calendar.HOUR_OF_DAY, wakeUpTime.toInt())
+//        dueDate.set(Calendar.MINUTE, 0)
+//        dueDate.set(Calendar.SECOND, 0)
+//        if (dueDate.before(currentDate)) {
+//            dueDate.add(Calendar.HOUR_OF_DAY, 24)
+//        }
+//
+//        val timeDiff = dueDate.timeInMillis.minus(currentDate.timeInMillis)
+//        Log.d("TimeDiff", timeDiff.toString())
+//        val dailyWorkRequest = OneTimeWorkRequestBuilder<ReminderWorkManager>()
+//            .setInitialDelay(timeDiff, TimeUnit.MILLISECONDS)
+//            .addTag(TAG_OUTPUT)
+//            .build()
+//        WorkManager.getInstance(applicationContext)
+//            .enqueue(dailyWorkRequest)
 
         return try {
             createNotification()
