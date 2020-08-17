@@ -1,6 +1,7 @@
 package com.florencenjeri.waterreminder.ui.view
 
 import android.os.Bundle
+import android.text.Html
 import android.util.Log
 import android.view.*
 import androidx.fragment.app.Fragment
@@ -57,11 +58,12 @@ class HomeFragment : Fragment() {
             val firstLetter = settings.name.substring(0, 1).toUpperCase()
             val drawable = homeViewModel.generateProfileImage(firstLetter)
             myProfileImage.setImageDrawable(drawable)
-            goalsTextView.text =
-                String.format(
-                    getString(R.string.water_consumption_goal),
-                    dailyGoal - dailyProgressAchieved
-                )
+            val goalText = String.format(
+                getString(R.string.water_consumption_goal),
+                dailyGoal - dailyProgressAchieved
+            )
+            val styledText: CharSequence = Html.fromHtml(goalText)
+            goalsTextView.text = styledText
         })
 
         fab.setOnClickListener {
@@ -72,11 +74,12 @@ class HomeFragment : Fragment() {
             //TODO : Fix this bug
             if (dailyGoal - dailyProgressAchieved >= 0) {
                 setUpCircularSeekbar()
-                goalsTextView.text =
-                    String.format(
-                        getString(R.string.water_consumption_goal),
-                        dailyGoal - dailyProgressAchieved
-                    )
+                val goalText = String.format(
+                    getString(R.string.water_consumption_goal),
+                    dailyGoal - dailyProgressAchieved
+                )
+                val styledText: CharSequence = Html.fromHtml(goalText)
+                goalsTextView.text = styledText
             }
         }
     }

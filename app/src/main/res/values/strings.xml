@@ -12,13 +12,11 @@
     <string name="male">Male</string>
     <string name="female">Female</string>
     <string name="hello_user">Hello, %1$s</string>
-    <string name="water_consumption_goal">You are %1$s glasses away from your daily goal</string>
-    <string name="notification_title">"Time to drink water, %1$s"</string>
+    <string name="water_consumption_goal">You are &lt;b>%1$s&lt;/b> glasses away from your daily goal</string>
+    <string name="notification_title">"Time to drink water"</string>
     <string name="water_reminder_channel_id">water_channel</string>
     <string name="time_to_drink_water_message">Its been a long time since you drank your last cup of water. Lets do it again?</string>
     <string name="drink_water_channel_id">drink_water_channel</string>
     <string name="drink_water_channel_name">Drink Water Reminder</string>
     <string name="drink_water_channel_description">Drink some water</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
