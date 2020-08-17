@@ -31,7 +31,7 @@
     <fragment
         android:id="@+id/userProfileFragment"
         android:name="com.florencenjeri.waterreminder.ui.view.UserProfileFragment"
-        android:label="UserProfileFragment">
+        android:label="User Profile">
         <action
             android:id="@+id/action_settingsFragment_to_HomeFragment"
             app:destination="@id/HomeFragment" />
