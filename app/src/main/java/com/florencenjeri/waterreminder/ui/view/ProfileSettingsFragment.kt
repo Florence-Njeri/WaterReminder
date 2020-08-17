@@ -13,6 +13,7 @@ import com.florencenjeri.waterreminder.R
 import com.florencenjeri.waterreminder.database.UserSettingsEntity
 import com.florencenjeri.waterreminder.ui.viewModel.CredentialsValidationState
 import com.florencenjeri.waterreminder.ui.viewModel.ProfileSettingsViewModel
+import com.google.android.material.transition.MaterialSharedAxis
 import kotlinx.android.synthetic.main.profile_settings_fragment.*
 import org.koin.androidx.scope.lifecycleScope
 import java.text.SimpleDateFormat
@@ -20,6 +21,11 @@ import java.util.*
 
 class ProfileSettingsFragment : Fragment() {
     private val profileSettingsViewModel: ProfileSettingsViewModel by lifecycleScope.inject()
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        zTransitionToHomeFragment()
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -258,5 +264,14 @@ class ProfileSettingsFragment : Fragment() {
             minute,
             DateFormat.is24HourFormat(activity)
         ).show()
+    }
+
+    private fun zTransitionToHomeFragment() {
+        //HomeFragment to ProfileSettings Fragment Navigation
+        val backward = MaterialSharedAxis(MaterialSharedAxis.Z, false)
+        reenterTransition = backward
+        //ProfileSettings to HomeFragment navigation
+        val forward = MaterialSharedAxis(MaterialSharedAxis.Z, true)
+        exitTransition = forward
     }
 }

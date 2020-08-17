@@ -8,11 +8,17 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import com.florencenjeri.waterreminder.R
 import com.florencenjeri.waterreminder.ui.viewModel.HomeViewModel
+import com.google.android.material.transition.MaterialSharedAxis
 import kotlinx.android.synthetic.main.fragment_user_profile.*
 import org.koin.android.viewmodel.ext.android.viewModel
 
 class UserProfileFragment : Fragment() {
     val homeViewModel: HomeViewModel by viewModel()
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        zTransitionFromHomeFragment()
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -50,5 +56,14 @@ class UserProfileFragment : Fragment() {
                 })
 
         }
+    }
+
+    private fun zTransitionFromHomeFragment() {
+        //From Home to UserProfile Fragment
+        val forward = MaterialSharedAxis(MaterialSharedAxis.Z, true)
+        enterTransition = forward
+        //Back to the Home Fragment
+        val backward = MaterialSharedAxis(MaterialSharedAxis.Z, false)
+        returnTransition = backward
     }
 }

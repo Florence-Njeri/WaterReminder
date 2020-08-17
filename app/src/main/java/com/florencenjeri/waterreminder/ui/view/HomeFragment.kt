@@ -8,6 +8,7 @@ import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.florencenjeri.waterreminder.R
 import com.florencenjeri.waterreminder.ui.viewModel.HomeViewModel
+import com.google.android.material.transition.MaterialSharedAxis
 import kotlinx.android.synthetic.main.fragment_home.*
 import me.tankery.lib.circularseekbar.CircularSeekBar
 import org.koin.android.viewmodel.ext.android.viewModel
@@ -22,6 +23,12 @@ class HomeFragment : Fragment() {
     var dailyGoal: Int = 0
     var dailyProgressAchieved: Int = 0
     lateinit var glassCapacity: String
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        zTransitionFromProfileSettingsFragment()
+        zTransitionToUserProfileFragment()
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -119,5 +126,23 @@ class HomeFragment : Fragment() {
 
 
         })
+    }
+
+    private fun zTransitionFromProfileSettingsFragment() {
+        //From Profile to Home Fragment
+        val forward = MaterialSharedAxis(MaterialSharedAxis.Z, true)
+        enterTransition = forward
+        //Back to the ProfileSettings Fragment
+        val backward = MaterialSharedAxis(MaterialSharedAxis.Z, false)
+        returnTransition = backward
+    }
+
+    private fun zTransitionToUserProfileFragment() {
+        //UserProfile back to Home Fragment Navigation
+        val backward = MaterialSharedAxis(MaterialSharedAxis.Z, false)
+        reenterTransition = backward
+        //Home to UserProfile navigation
+        val forward = MaterialSharedAxis(MaterialSharedAxis.Z, true)
+        exitTransition = forward
     }
 }
