@@ -56,6 +56,7 @@ class UserProfileFragment : Fragment() {
                     } else {
                         poundsUnitsSettings.isSelected = true
                     }
+                    waterIntakeText.text = settings.numOfGlasses.toString()
                 })
 
         }

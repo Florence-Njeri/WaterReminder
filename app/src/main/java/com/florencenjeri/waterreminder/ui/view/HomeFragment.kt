@@ -11,11 +11,12 @@ import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.florencenjeri.waterreminder.R
 import com.florencenjeri.waterreminder.ui.viewModel.HomeViewModel
-import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.transition.MaterialSharedAxis
 import kotlinx.android.synthetic.main.fragment_home.*
 import me.tankery.lib.circularseekbar.CircularSeekBar
 import org.koin.android.viewmodel.ext.android.viewModel
+import uk.co.samuelwall.materialtaptargetprompt.MaterialTapTargetPrompt
+import uk.co.samuelwall.materialtaptargetprompt.MaterialTapTargetPrompt.PromptStateChangeListener
 
 
 /**
@@ -72,14 +73,19 @@ class HomeFragment : Fragment() {
         fab.setOnClickListener {
             setWaterDrankOnFabClick()
         }
-        //Show new user a SnackBar
+//        //Show new user a SnackBar
         if (!homeViewModel.checkIfUserIsOnboarded()) {
-            Snackbar.make(
-                coordinator,
-                R.string.track_water,
-                Snackbar.LENGTH_SHORT
-            ).show()
-            homeViewModel.setUserOnboardedToTrue()
+            MaterialTapTargetPrompt.Builder(requireActivity())
+                .setTarget(fab)
+                .setPrimaryText("Track your water intake")
+                .setSecondaryText(getString(R.string.track_water))
+                .setPromptStateChangeListener(PromptStateChangeListener { prompt, state ->
+                    if (state == MaterialTapTargetPrompt.STATE_FOCAL_PRESSED) {
+                        homeViewModel.setUserOnboardedToTrue()
+                    }
+                })
+                .setBackgroundColour(resources.getColor(R.color.colorPrimary))
+                .show()
         }
 
     }

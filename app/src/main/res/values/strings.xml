@@ -20,4 +20,5 @@
     <string name="drink_water_channel_name">Drink Water Reminder</string>
     <string name="drink_water_channel_description">Drink some water</string>
     <string name="track_water">Track your drinking habits by opening the app and tapping on the tick mark once you drink a glass of water</string>
+    <string name="num_of_glasses">6</string>
 </resources>
