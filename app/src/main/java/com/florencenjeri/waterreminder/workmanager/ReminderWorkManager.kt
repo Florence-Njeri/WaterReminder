@@ -24,7 +24,7 @@ class ReminderWorkManager(
 
     override suspend fun doWork(): Result {
         return try {
-            createNotification()
+            triggerNotification()
             Result.success()
         } catch (error: Throwable) {
             Result.failure()
@@ -32,7 +32,7 @@ class ReminderWorkManager(
 
     }
 
-    private fun createNotification() {
+    private fun triggerNotification() {
         val notificationManager = ContextCompat.getSystemService(
             app,
             NotificationManager::class.java

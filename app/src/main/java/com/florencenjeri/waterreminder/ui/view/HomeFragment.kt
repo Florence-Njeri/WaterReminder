@@ -45,7 +45,6 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setHasOptionsMenu(true)
-        homeViewModel.setUpReminder()
         dailyProgressButton.isSelected = true
         homeViewModel.getUserSettingsData().observe(viewLifecycleOwner, Observer { settings ->
             //Initialize the global variables
