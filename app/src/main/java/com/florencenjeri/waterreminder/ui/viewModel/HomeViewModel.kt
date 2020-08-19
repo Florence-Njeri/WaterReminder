@@ -18,15 +18,17 @@ class HomeViewModel(
     val workManagerHelper: WorkManagerHelper,
     val userRepository: UserRepository
 ) : ViewModel() {
+    var userProgress = 0
+    var totalNumOfGlasses = 0
+    var dailyGoal = 0
     val profileSettings = MutableLiveData<UserSettingsEntity>()
     fun getProfileSettings(): LiveData<UserSettingsEntity> = profileSettings
+
     fun getUserSettingsData() = settingsRepository.retrieveUserSettings()
+
 
     fun getUserById(userId: Long) = settingsRepository.getUser(userId)
 
-    fun setUpReminder() {
-        workManagerHelper.scheduleWaterReminder()
-    }
 
     fun stopReminder() {
         workManagerHelper.stopReminder()
@@ -35,6 +37,16 @@ class HomeViewModel(
     fun checkIfUserIsOnboarded() = userRepository.isUserOnboard()
 
     fun setUserOnboardedToTrue() = userRepository.setUserOnboarded(true)
+
+    fun decrementGlassesGoal(): Int {
+        totalNumOfGlasses -= 1
+        return totalNumOfGlasses
+    }
+
+    fun incrementWaterIntake(): Int {
+        userProgress += 1
+        return userProgress
+    }
 
     fun generateProfileImage(firstLetter: String?): Drawable {
         val generator: ColorGenerator = ColorGenerator.MATERIAL // or use DEFAULT

@@ -25,9 +25,12 @@ import uk.co.samuelwall.materialtaptargetprompt.MaterialTapTargetPrompt.PromptSt
 class HomeFragment : Fragment() {
     val homeViewModel: HomeViewModel by viewModel()
     private var userId: Long = 1
-    var dailyGoal: Int = 0
-    var dailyProgressAchieved: Int = 0
-    lateinit var glassCapacity: String
+
+    /**
+     * TODO: Remove all the logic of calculating the glasses of water into the VIewModel
+     * Get the num of remaining glasses from the View Model
+     * Update the Circular Seekbar from data obtained in the ViewModel
+     */
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         zTransitionFromProfileSettingsFragment()
@@ -48,8 +51,8 @@ class HomeFragment : Fragment() {
         dailyProgressButton.isSelected = true
         homeViewModel.getUserSettingsData().observe(viewLifecycleOwner, Observer { settings ->
             //Initialize the global variables
-            dailyGoal = settings.numOfGlasses
-            glassCapacity = settings.cupMeasurements
+            homeViewModel.totalNumOfGlasses = settings.numOfGlasses
+            homeViewModel.dailyGoal = settings.numOfGlasses
             userId = settings.id
             welcomeTextView.text = String.format(getString(R.string.hello_user), settings.name)
             String.format(getString(R.string.notification_title), settings.name)
@@ -63,16 +66,21 @@ class HomeFragment : Fragment() {
             myProfileImage.setImageDrawable(drawable)
             val goalText = String.format(
                 getString(R.string.water_consumption_goal),
-                dailyGoal - dailyProgressAchieved
+                homeViewModel.totalNumOfGlasses - homeViewModel.userProgress
             )
             val styledText: CharSequence = Html.fromHtml(goalText)
             goalsTextView.text = styledText
         })
 
         fab.setOnClickListener {
+            homeViewModel.incrementWaterIntake()
             setWaterDrankOnFabClick()
         }
-//        //Show new user a SnackBar
+        setNewUserOnBoarded()
+
+    }
+
+    private fun setNewUserOnBoarded() {
         if (!homeViewModel.checkIfUserIsOnboarded()) {
             MaterialTapTargetPrompt.Builder(requireActivity())
                 .setTarget(fab)
@@ -86,31 +94,29 @@ class HomeFragment : Fragment() {
                 .setBackgroundColour(resources.getColor(R.color.colorPrimary))
                 .show()
         }
-
     }
 
     private fun setWaterDrankOnFabClick() {
         //TODO : Increase the capacity of water consumed that day
-        dailyProgressAchieved++
-        Log.d("Progress", dailyProgressAchieved.toString())
 
         //TODO : Fix this bug
-        if (dailyGoal - dailyProgressAchieved >= 0) {
+        if (homeViewModel.totalNumOfGlasses - homeViewModel.userProgress >= 0) {
             setUpCircularSeekbar()
             val goalText = String.format(
                 getString(R.string.water_consumption_goal),
-                dailyGoal - dailyProgressAchieved
+                homeViewModel.totalNumOfGlasses - homeViewModel.userProgress
             )
             val styledText: CharSequence = Html.fromHtml(goalText)
             goalsTextView.text = styledText
         }
-        if (dailyGoal - dailyProgressAchieved == 0) {
+        if (homeViewModel.totalNumOfGlasses - homeViewModel.userProgress == 0) {
             goalsTextView.visibility = GONE
             textViewGoalComplete.visibility = VISIBLE
         }
     }
 
-    fun checkWaterConsumptionGoalAchieved(): Boolean = dailyProgressAchieved == dailyGoal
+    fun checkWaterConsumptionGoalAchieved(): Boolean =
+        homeViewModel.userProgress == homeViewModel.totalNumOfGlasses
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         super.onCreateOptionsMenu(menu, inflater)
@@ -131,8 +137,8 @@ class HomeFragment : Fragment() {
     }
 
     private fun setUpCircularSeekbar() {
-        circularSeekBar.max = dailyGoal.toFloat()
-        circularSeekBar.progress = dailyProgressAchieved.toFloat()
+        circularSeekBar.max = homeViewModel.dailyGoal.toFloat()
+        circularSeekBar.progress = homeViewModel.userProgress.toFloat()
 
         circularSeekBar.setOnSeekBarChangeListener(object :
             CircularSeekBar.OnCircularSeekBarChangeListener {
@@ -142,7 +148,7 @@ class HomeFragment : Fragment() {
                 fromUser: Boolean
             ) {
                 //On fab clicked, update the progress bar
-                circularSeekBar?.progress = dailyProgressAchieved.toFloat()
+                circularSeekBar?.progress = homeViewModel.userProgress.toFloat()
             }
 
             override fun onStartTrackingTouch(seekBar: CircularSeekBar?) {
