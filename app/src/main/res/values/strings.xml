@@ -1,15 +1,24 @@
 <resources>
     <string name="app_name">WaterReminder</string>
-    <string name="action_settings">Settings</string>
+    <string name="action_user_profile">User Profile</string>
     <!-- Strings used for fragments for navigation -->
     <string name="profile_settings_fragment_label">Profile Settings</string>
     <string name="home_fragment_label">Home</string>
     <string name="next">Next</string>
     <string name="previous">Previous</string>
-
     <string name="hello_first_fragment">Hello first fragment</string>
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
     <string name="enter_your_name">Enter your name</string>
     <string name="male">Male</string>
     <string name="female">Female</string>
+    <string name="hello_user">Hello, %1$s</string>
+    <string name="water_consumption_goal">You are &lt;b>%1$s&lt;/b> glasses away from your daily goal</string>
+    <string name="notification_title">"Time to drink water"</string>
+    <string name="water_reminder_channel_id">water_channel</string>
+    <string name="time_to_drink_water_message">Its been a long time since you drank your last cup of water. Lets do it again?</string>
+    <string name="drink_water_channel_id">drink_water_channel</string>
+    <string name="drink_water_channel_name">Drink Water Reminder</string>
+    <string name="drink_water_channel_description">Drink some water</string>
+    <string name="track_water">Track your drinking habits by opening the app and tapping on the tick mark once you drink a glass of water</string>
+    <string name="num_of_glasses">6</string>
 </resources>
