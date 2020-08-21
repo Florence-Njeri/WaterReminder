@@ -63,7 +63,7 @@ class ProfileSettingsFragment : Fragment() {
             val numOfGlasses =
                 profileSettingsViewModel.getTotalNumOfGlasses(goal.toInt(), cupMeasurement.toInt())
             val hoursAwake = getNumOfHoursAwake(startTime, endTime)
-            val delayTime = profileSettingsViewModel.getScheduledNotificationsDelayTime(
+            val delayTime = profileSettingsViewModel.getScheduledNotificationsRepeatInterval(
                 hoursAwake,
                 numOfGlasses
             )
