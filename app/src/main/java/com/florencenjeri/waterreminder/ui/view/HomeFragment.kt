@@ -3,16 +3,14 @@ package com.florencenjeri.waterreminder.ui.view
 import android.os.Bundle
 import android.text.Html
 import android.view.*
-import android.widget.ImageView
-import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.florencenjeri.waterreminder.R
+import com.florencenjeri.waterreminder.dialog.CongratsDialog
 import com.florencenjeri.waterreminder.ui.viewModel.HomeViewModel
 import com.google.android.material.transition.MaterialSharedAxis
 import kotlinx.android.synthetic.main.fragment_home.*
-import me.tankery.lib.circularseekbar.CircularSeekBar
 import org.koin.android.viewmodel.ext.android.viewModel
 import uk.co.samuelwall.materialtaptargetprompt.MaterialTapTargetPrompt
 import uk.co.samuelwall.materialtaptargetprompt.MaterialTapTargetPrompt.PromptStateChangeListener
@@ -58,7 +56,13 @@ class HomeFragment : Fragment() {
             if (checkWaterConsumptionGoalAchieved()) {
                 homeViewModel.stopReminder()
             }
-
+            val styledBottomText = Html.fromHtml(
+                String.format(
+                    getString(R.string.goal_progress),
+                    homeViewModel.userProgress.toString()
+                )
+            )
+            arcProgress.bottomText = styledBottomText.toString()
             val firstLetter = settings.name.substring(0, 1).toUpperCase()
             val drawable = homeViewModel.generateProfileImage(firstLetter)
             myProfileImage.setImageDrawable(drawable)
@@ -75,6 +79,7 @@ class HomeFragment : Fragment() {
             setWaterDrankOnFabClick()
         }
         setNewUserOnBoarded()
+        arcProgress.progress = 0
 
     }
 
@@ -103,6 +108,12 @@ class HomeFragment : Fragment() {
             )
             val styledText: CharSequence = Html.fromHtml(goalText)
             goalsTextView.text = styledText
+            val arcBottomText = String.format(
+                getString(R.string.goal_progress),
+                homeViewModel.userProgress
+            )
+            val styledBottomText: CharSequence = Html.fromHtml(arcBottomText)
+            arcProgress.bottomText = styledBottomText.toString()
         }
         if (homeViewModel.totalNumOfGlasses - homeViewModel.userProgress == 0) {
             showGoalAchievedDialog()
@@ -131,30 +142,11 @@ class HomeFragment : Fragment() {
     }
 
     private fun setUpCircularSeekbar() {
-        circularSeekBar.max = homeViewModel.dailyGoal.toFloat()
-        circularSeekBar.progress = homeViewModel.userProgress.toFloat()
+        val max = homeViewModel.totalNumOfGlasses.toFloat()
+        val progress = homeViewModel.userProgress.toFloat()
 
-        circularSeekBar.setOnSeekBarChangeListener(object :
-            CircularSeekBar.OnCircularSeekBarChangeListener {
-            override fun onProgressChanged(
-                circularSeekBar: CircularSeekBar?,
-                progress: Float,
-                fromUser: Boolean
-            ) {
-                //On fab clicked, update the progress bar
-                circularSeekBar?.progress = homeViewModel.userProgress.toFloat()
-            }
-
-            override fun onStartTrackingTouch(seekBar: CircularSeekBar?) {
-                TODO("Not yet implemented")
-            }
-
-            override fun onStopTrackingTouch(seekBar: CircularSeekBar?) {
-                TODO("Not yet implemented")
-            }
-
-
-        })
+        val percentage = progress / max * 100
+        arcProgress.progress = percentage.toInt()
     }
 
     private fun zTransitionFromProfileSettingsFragment() {
@@ -176,24 +168,7 @@ class HomeFragment : Fragment() {
     }
 
     private fun showGoalAchievedDialog() {
-        activity.let {
-            val dialogTitle = getString(R.string.goal_achieved_dialog_title)
-            val positiveButtonTitle = getString(R.string.claim_badge)
-            val myDialog = AlertDialog.Builder(it!!)
-
-            val goalsBadge = ImageView(it)
-            goalsBadge.setImageDrawable(resources.getDrawable(R.drawable.goals_badge))
-            myDialog.setTitle(dialogTitle)
-            myDialog.setView(goalsBadge)
-
-            myDialog.setPositiveButton(positiveButtonTitle) { dialog, _ ->
-                /**
-                 * Add the badge to UserProfile
-                 */
-                dialog.dismiss()
-            }
-
-            myDialog.create().show()
-        }
+        CongratsDialog.newInstance(getString(R.string.goal_achieved_dialog_title))
+            .show(parentFragmentManager, CongratsDialog.TAG)
     }
 }

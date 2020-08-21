@@ -28,7 +28,7 @@
             android:layout_marginStart="16dp"
             android:text="@string/hello_user"
             android:textColor="@color/black"
-            android:textSize="18sp"
+            android:textSize="16sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="@+id/myProfileImage"
             app:layout_constraintEnd_toEndOf="parent"
@@ -50,23 +50,18 @@
             app:layout_constraintStart_toStartOf="@+id/welcomeTextView"
             app:layout_constraintTop_toBottomOf="@+id/myProfileImage" />
 
-        <me.tankery.lib.circularseekbar.CircularSeekBar
-            android:id="@+id/circularSeekBar"
-            android:layout_width="120dp"
-            android:layout_height="120dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="16dp"
-            app:cs_circle_color="@android:color/darker_gray"
-            app:cs_circle_progress_color="@color/colorAccent"
-            app:cs_circle_stroke_width="8dp"
-            app:cs_circle_style="butt"
-            app:cs_disable_pointer="true"
-            app:cs_disable_progress_glow="true"
-            app:cs_end_angle="420.0"
-            app:cs_hide_progress_when_empty="false"
-            app:cs_maintain_equal_circle="false"
-            app:cs_start_angle="120.0"
+        <com.github.lzyzsd.circleprogress.ArcProgress
+            android:id="@+id/arcProgress"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:layout_marginTop="@dimen/margin"
+            app:arc_bottom_text="@string/goal_progress"
+            app:arc_finished_color="@color/colorAccent"
+            app:arc_progress="0"
+            app:arc_stroke_width="10dp"
+            app:arc_text_color="@color/colorPrimary"
+            app:arc_text_size="24sp"
+            app:arc_unfinished_color="@android:color/darker_gray"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/goalsTextView" />
@@ -83,7 +78,7 @@
             android:textColor="@color/black"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/circularSeekBar" />
+            app:layout_constraintTop_toBottomOf="@+id/arcProgress" />
 
         <LinearLayout
             android:id="@+id/time_button_container"
@@ -148,7 +143,5 @@
         android:tint="@color/white"
         android:tooltipText="Press once you have drank a glass of water"
         app:fabCustomSize="56dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
         app:srcCompat="@drawable/ic_tick" />
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
