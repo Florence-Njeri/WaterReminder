@@ -3,8 +3,6 @@ package com.florencenjeri.waterreminder.ui.view
 import android.os.Bundle
 import android.text.Html
 import android.view.*
-import android.view.View.GONE
-import android.view.View.VISIBLE
 import android.widget.ImageView
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
@@ -107,8 +105,7 @@ class HomeFragment : Fragment() {
             goalsTextView.text = styledText
         }
         if (homeViewModel.totalNumOfGlasses - homeViewModel.userProgress == 0) {
-            goalsTextView.visibility = GONE
-            textViewGoalComplete.visibility = VISIBLE
+            showGoalAchievedDialog()
         }
     }
 
