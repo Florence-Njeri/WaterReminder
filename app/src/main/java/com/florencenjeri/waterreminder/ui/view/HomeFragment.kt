@@ -2,10 +2,11 @@ package com.florencenjeri.waterreminder.ui.view
 
 import android.os.Bundle
 import android.text.Html
-import android.util.Log
 import android.view.*
 import android.view.View.GONE
 import android.view.View.VISIBLE
+import android.widget.ImageView
+import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
@@ -56,7 +57,6 @@ class HomeFragment : Fragment() {
             userId = settings.id
             welcomeTextView.text = String.format(getString(R.string.hello_user), settings.name)
             String.format(getString(R.string.notification_title), settings.name)
-            Log.d("Settings", settings.toString())
             if (checkWaterConsumptionGoalAchieved()) {
                 homeViewModel.stopReminder()
             }
@@ -97,9 +97,6 @@ class HomeFragment : Fragment() {
     }
 
     private fun setWaterDrankOnFabClick() {
-        //TODO : Increase the capacity of water consumed that day
-
-        //TODO : Fix this bug
         if (homeViewModel.totalNumOfGlasses - homeViewModel.userProgress >= 0) {
             setUpCircularSeekbar()
             val goalText = String.format(
@@ -181,4 +178,25 @@ class HomeFragment : Fragment() {
         exitTransition = forward
     }
 
+    private fun showGoalAchievedDialog() {
+        activity.let {
+            val dialogTitle = getString(R.string.goal_achieved_dialog_title)
+            val positiveButtonTitle = getString(R.string.claim_badge)
+            val myDialog = AlertDialog.Builder(it!!)
+
+            val goalsBadge = ImageView(it)
+            goalsBadge.setImageDrawable(resources.getDrawable(R.drawable.goals_badge))
+            myDialog.setTitle(dialogTitle)
+            myDialog.setView(goalsBadge)
+
+            myDialog.setPositiveButton(positiveButtonTitle) { dialog, _ ->
+                /**
+                 * Add the badge to UserProfile
+                 */
+                dialog.dismiss()
+            }
+
+            myDialog.create().show()
+        }
+    }
 }
