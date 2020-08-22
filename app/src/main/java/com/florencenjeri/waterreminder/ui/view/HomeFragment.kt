@@ -66,12 +66,8 @@ class HomeFragment : Fragment() {
             val firstLetter = settings.name.substring(0, 1).toUpperCase()
             val drawable = homeViewModel.generateProfileImage(firstLetter)
             myProfileImage.setImageDrawable(drawable)
-            val goalText = String.format(
-                getString(R.string.water_consumption_goal),
-                homeViewModel.totalNumOfGlasses - homeViewModel.userProgress
-            )
-            val styledText: CharSequence = Html.fromHtml(goalText)
-            goalsTextView.text = styledText
+            setGoalsTextView()
+            setNumOfGlassesLeft()
         })
 
         fab.setOnClickListener {
@@ -81,6 +77,14 @@ class HomeFragment : Fragment() {
         setNewUserOnBoarded()
         arcProgress.progress = 0
 
+    }
+
+    private fun setNumOfGlassesLeft() {
+        numOfGlassesLeft.text =
+            String.format(
+                getString(R.string.glasses_left),
+                homeViewModel.totalNumOfGlasses - homeViewModel.userProgress
+            )
     }
 
     private fun setNewUserOnBoarded() {
@@ -102,22 +106,20 @@ class HomeFragment : Fragment() {
     private fun setWaterDrankOnFabClick() {
         if (homeViewModel.totalNumOfGlasses - homeViewModel.userProgress >= 0) {
             setUpCircularSeekbar()
-            val goalText = String.format(
-                getString(R.string.water_consumption_goal),
-                homeViewModel.totalNumOfGlasses - homeViewModel.userProgress
-            )
-            val styledText: CharSequence = Html.fromHtml(goalText)
-            goalsTextView.text = styledText
-            val arcBottomText = String.format(
-                getString(R.string.goal_progress),
-                homeViewModel.userProgress
-            )
-            val styledBottomText: CharSequence = Html.fromHtml(arcBottomText)
-            arcProgress.bottomText = styledBottomText.toString()
+            setNumOfGlassesLeft()
         }
         if (homeViewModel.totalNumOfGlasses - homeViewModel.userProgress == 0) {
             showGoalAchievedDialog()
         }
+    }
+
+    private fun setGoalsTextView() {
+        val goalText = String.format(
+            getString(R.string.todays_goal),
+            homeViewModel.totalNumOfGlasses
+        )
+        val styledText: CharSequence = Html.fromHtml(goalText)
+        goalsTextView.text = styledText
     }
 
     fun checkWaterConsumptionGoalAchieved(): Boolean =

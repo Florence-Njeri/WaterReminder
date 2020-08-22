@@ -42,9 +42,9 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
-            android:text="@string/water_consumption_goal"
+            android:text="@string/todays_goal"
             android:textColor="@color/black"
-            android:textSize="14sp"
+            android:textSize="16sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="@+id/welcomeTextView"
@@ -52,17 +52,18 @@
 
         <com.github.lzyzsd.circleprogress.ArcProgress
             android:id="@+id/arcProgress"
-            android:layout_width="200dp"
-            android:layout_height="200dp"
+            android:layout_width="140dp"
+            android:layout_height="140dp"
             android:layout_marginTop="@dimen/margin"
             app:arc_bottom_text="@string/goal_progress"
             app:arc_finished_color="@color/colorAccent"
             app:arc_progress="0"
             app:arc_stroke_width="10dp"
-            app:arc_text_color="@color/colorPrimary"
-            app:arc_text_size="24sp"
+            app:arc_text_color="@color/black"
+            app:arc_text_size="30sp"
             app:arc_unfinished_color="@android:color/darker_gray"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.3"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/goalsTextView" />
 
@@ -128,6 +129,37 @@
                 android:textColor="@drawable/button_text" />
 
         </LinearLayout>
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginBottom="16dp"
+            android:alpha="0.7"
+            android:text="Left"
+            android:textColor="@android:color/background_dark"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@+id/numOfGlassesLeft"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toEndOf="@+id/arcProgress" />
+
+        <TextView
+            android:id="@+id/numOfGlassesLeft"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:textColor="@color/black"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/arcProgress"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toEndOf="@+id/arcProgress"
+            app:layout_constraintTop_toTopOf="@+id/arcProgress"
+            tools:text="6 glasses" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
