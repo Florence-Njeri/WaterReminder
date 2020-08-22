@@ -37,18 +37,17 @@
             app:layout_constraintTop_toTopOf="@+id/myProfileImage" />
 
         <TextView
-            android:id="@+id/goalsTextView"
-            android:layout_width="0dp"
+            android:id="@+id/goals"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="16dp"
-            android:text="@string/todays_goal"
+            android:layout_marginTop="32dp"
+            android:text="Today's Goal"
             android:textColor="@color/black"
             android:textSize="16sp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="@+id/welcomeTextView"
-            app:layout_constraintTop_toBottomOf="@+id/myProfileImage" />
+            app:layout_constraintHorizontal_bias="0.2"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/arcProgress" />
 
         <com.github.lzyzsd.circleprogress.ArcProgress
             android:id="@+id/arcProgress"
@@ -56,6 +55,7 @@
             android:layout_height="140dp"
             android:layout_marginTop="32dp"
             app:arc_bottom_text="@string/goal_progress"
+            app:arc_bottom_text_size="10sp"
             app:arc_finished_color="@color/colorAccent"
             app:arc_progress="0"
             app:arc_stroke_width="10dp"
@@ -63,103 +63,76 @@
             app:arc_text_size="30sp"
             app:arc_unfinished_color="@android:color/darker_gray"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.3"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/goalsTextView" />
+            app:layout_constraintTop_toBottomOf="@+id/welcomeTextView" />
 
-        <TextView
-            android:id="@+id/textViewSummary"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="32dp"
-            android:layout_marginEnd="16dp"
-            android:text="Summary"
-            android:textAllCaps="true"
-            android:textColor="@color/black"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/arcProgress" />
+        <!--        <TextView-->
+        <!--            android:id="@+id/textViewSummary"-->
+        <!--            android:layout_width="wrap_content"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:layout_marginStart="16dp"-->
+        <!--            android:layout_marginTop="24dp"-->
+        <!--            android:layout_marginEnd="16dp"-->
+        <!--            android:text="Summary"-->
+        <!--            android:textAllCaps="true"-->
+        <!--            android:textColor="@color/black"-->
+        <!--            android:textStyle="bold"-->
+        <!--            app:layout_constraintEnd_toEndOf="parent"-->
+        <!--            app:layout_constraintStart_toStartOf="parent"-->
+        <!--            app:layout_constraintTop_toBottomOf="@+id/goalsTextView" />-->
 
-        <LinearLayout
-            android:id="@+id/time_button_container"
-            android:layout_width="wrap_content"
-            android:layout_height="30dp"
-            android:layout_gravity="center"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
-            android:background="@drawable/name_view_rounded_corners"
-            android:orientation="horizontal"
-            android:padding="0.5dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textViewSummary">
-
-            <Button
-                android:id="@+id/dailyProgressButton"
-                style="?android:attr/borderlessButtonStyle"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:background="@drawable/button_selector"
-                android:text="Daily"
-                android:textAllCaps="false"
-                android:textColor="@drawable/button_text" />
-
-            <Button
-                android:id="@+id/weeklyProgressButton"
-                style="?android:attr/borderlessButtonStyle"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:background="@drawable/button_selector"
-                android:text="Weekly"
-                android:textAllCaps="false"
-                android:textColor="@drawable/button_text" />
-
-            <Button
-                android:id="@+id/monthlyProgressButton"
-                style="?android:attr/borderlessButtonStyle"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:background="@drawable/button_selector"
-                android:text="Monthly"
-                android:textAllCaps="false"
-                android:textColor="@drawable/button_text" />
-
-        </LinearLayout>
+        <!--        <com.github.mikephil.charting.charts.LineChart-->
+        <!--            android:id="@+id/chart"-->
+        <!--            android:layout_width="match_parent"-->
+        <!--            android:layout_height="400dp"-->
+        <!--            android:layout_marginStart="16dp"-->
+        <!--            android:layout_marginTop="16dp"-->
+        <!--            android:layout_marginEnd="16dp"-->
+        <!--            app:layout_constraintEnd_toEndOf="parent"-->
+        <!--            app:layout_constraintStart_toStartOf="parent"-->
+        <!--            app:layout_constraintTop_toBottomOf="@+id/textViewSummary" />-->
 
         <TextView
             android:id="@+id/textView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:layout_marginBottom="16dp"
-            android:alpha="0.7"
+            android:layout_marginEnd="16dp"
             android:text="Left"
             android:textColor="@android:color/background_dark"
             android:textSize="16sp"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toTopOf="@+id/numOfGlassesLeft"
+            app:layout_constraintBottom_toBottomOf="@+id/goals"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/goals"
+            app:layout_constraintTop_toTopOf="@+id/goals" />
+
+
+        <TextView
+            android:id="@+id/goalsTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="@+id/goals"
             app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toEndOf="@+id/arcProgress" />
+            app:layout_constraintStart_toStartOf="@+id/goals"
+            app:layout_constraintTop_toBottomOf="@+id/goals"
+            tools:text="6 glasses" />
 
         <TextView
             android:id="@+id/numOfGlassesLeft"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
             android:textColor="@color/black"
-            android:textSize="24sp"
+            android:textSize="18sp"
             android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="@+id/arcProgress"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/textView"
             app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toEndOf="@+id/arcProgress"
-            app:layout_constraintTop_toTopOf="@+id/arcProgress"
+            app:layout_constraintStart_toStartOf="@+id/textView"
+            app:layout_constraintTop_toBottomOf="@+id/textView"
             tools:text="6 glasses" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

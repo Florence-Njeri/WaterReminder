@@ -75,4 +75,7 @@ dependencies {
     //Circular Reveal Effect
     implementation 'uk.co.samuelwall:material-tap-target-prompt:3.0.0'
     implementation 'com.github.lzyzsd:circleprogress:1.2.1'
+
+    //MPChart
+    implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
 }
