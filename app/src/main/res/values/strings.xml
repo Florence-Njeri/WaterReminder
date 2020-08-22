@@ -23,6 +23,6 @@
     <string name="track_water">Track your drinking habits by opening the app and tapping on the tick mark once you drink a glass of water</string>
     <string name="num_of_glasses">6</string>
     <string name="goal_achieved_dialog_title">You have attained your daily goal</string>
-    <string name="claim_badge">Claim Badge</string>
+    <string name="good_work">OK</string>
     <string name="glasses_left">%1$s glasses</string>
 </resources>
