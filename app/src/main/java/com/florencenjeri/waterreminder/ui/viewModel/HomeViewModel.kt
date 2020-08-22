@@ -3,7 +3,6 @@ package com.florencenjeri.waterreminder.ui.viewModel
 import android.graphics.Color
 import android.graphics.Typeface
 import android.graphics.drawable.Drawable
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.amulyakhare.textdrawable.TextDrawable
@@ -22,7 +21,6 @@ class HomeViewModel(
     var totalNumOfGlasses = 0
     var dailyGoal = 0
     val profileSettings = MutableLiveData<UserSettingsEntity>()
-    fun getProfileSettings(): LiveData<UserSettingsEntity> = profileSettings
 
     fun getUserSettingsData() = settingsRepository.retrieveUserSettings()
 
@@ -46,6 +44,12 @@ class HomeViewModel(
     fun incrementWaterIntake(): Int {
         userProgress += 1
         return userProgress
+    }
+
+    fun getNumOfGlassesDrankLeft() = userRepository.getNumOfGlassesDrank()
+
+    fun setNumberOfGlassesLeft(numOfGlassesLeft: Int) {
+        userRepository.setNumberOfGlassesDrank(numOfGlassesLeft)
     }
 
     fun generateProfileImage(firstLetter: String?): Drawable {

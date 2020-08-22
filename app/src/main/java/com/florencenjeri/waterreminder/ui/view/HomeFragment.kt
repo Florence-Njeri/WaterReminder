@@ -70,7 +70,6 @@ class HomeFragment : Fragment() {
         })
 
         fab.setOnClickListener {
-            homeViewModel.incrementWaterIntake()
             setWaterDrankOnFabClick()
         }
         setNewUserOnBoarded()
@@ -82,7 +81,7 @@ class HomeFragment : Fragment() {
         numOfGlassesLeft.text =
             String.format(
                 getString(R.string.glasses_left),
-                homeViewModel.totalNumOfGlasses - homeViewModel.userProgress
+                homeViewModel.getNumOfGlassesDrankLeft()
             )
     }
 
@@ -103,9 +102,11 @@ class HomeFragment : Fragment() {
     }
 
     private fun setWaterDrankOnFabClick() {
+        homeViewModel.incrementWaterIntake()
         if (homeViewModel.totalNumOfGlasses - homeViewModel.userProgress >= 0) {
             setUpCircularSeekbar()
             setNumOfGlassesLeft()
+            homeViewModel.setNumberOfGlassesLeft(homeViewModel.totalNumOfGlasses - homeViewModel.userProgress)
         }
         if (homeViewModel.totalNumOfGlasses - homeViewModel.userProgress == 0) {
             showGoalAchievedDialog()

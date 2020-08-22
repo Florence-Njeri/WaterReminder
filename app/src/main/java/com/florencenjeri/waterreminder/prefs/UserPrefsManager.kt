@@ -7,6 +7,7 @@ class UserPrefsManager(private val prefs: SharedPreferences) {
         private const val USER_PREFS = "user-settings_config"
         private const val USER_ON_BOARD = "user-on-board_config"
         const val TIME_DELAY_PREFS = "user-settings_delay"
+        const val NUM_OF_GLASSES = "num-of-glasses"
     }
 
     fun isUserSettingsConfigured() = prefs.getBoolean(USER_PREFS, false)
@@ -24,4 +25,10 @@ class UserPrefsManager(private val prefs: SharedPreferences) {
     fun storeRepeatIntervalTime(time: Long) {
         prefs.edit().putLong(TIME_DELAY_PREFS, time).apply()
     }
+
+    fun setNumberOfGlassesToDrink(numOfGlasses: Int) {
+        prefs.edit().putInt(NUM_OF_GLASSES, numOfGlasses).apply()
+    }
+
+    fun getNumOfGlassesToDrink() = prefs.getInt(NUM_OF_GLASSES, 0)
 }
