@@ -3,11 +3,9 @@ package com.florencenjeri.waterreminder.ui.viewModel
 import android.graphics.Color
 import android.graphics.Typeface
 import android.graphics.drawable.Drawable
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.amulyakhare.textdrawable.TextDrawable
 import com.amulyakhare.textdrawable.util.ColorGenerator
-import com.florencenjeri.waterreminder.database.UserSettingsEntity
 import com.florencenjeri.waterreminder.repository.SettingsRepository
 import com.florencenjeri.waterreminder.repository.UserRepository
 import com.florencenjeri.waterreminder.utils.WorkManagerHelper
@@ -17,16 +15,12 @@ class HomeViewModel(
     val workManagerHelper: WorkManagerHelper,
     val userRepository: UserRepository
 ) : ViewModel() {
-    var userProgress = 0
-    var totalNumOfGlasses = 0
-    var dailyGoal = 0
-    val profileSettings = MutableLiveData<UserSettingsEntity>()
+    var userProgress = userRepository.getNumOfGlassesDrank()
+    var dailyWaterConsumptionGoal = 0
 
     fun getUserSettingsData() = settingsRepository.retrieveUserSettings()
 
-
     fun getUserById(userId: Long) = settingsRepository.getUser(userId)
-
 
     fun stopReminder() {
         workManagerHelper.stopReminder()
@@ -36,19 +30,18 @@ class HomeViewModel(
 
     fun setUserOnboardedToTrue() = userRepository.setUserOnboarded(true)
 
-    fun decrementGlassesGoal(): Int {
-        totalNumOfGlasses -= 1
-        return totalNumOfGlasses
-    }
-
     fun incrementWaterIntake(): Int {
         userProgress += 1
         return userProgress
     }
 
-    fun getNumOfGlassesDrankLeft() = userRepository.getNumOfGlassesDrank()
+    fun getNumberOfGlassesLeft(): Int {
+        return dailyWaterConsumptionGoal - userProgress
+    }
 
-    fun setNumberOfGlassesLeft(numOfGlassesLeft: Int) {
+    fun getNumOfGlassesDrank() = userRepository.getNumOfGlassesDrank()
+
+    fun setNumberOfGlassesDrank(numOfGlassesLeft: Int) {
         userRepository.setNumberOfGlassesDrank(numOfGlassesLeft)
     }
 

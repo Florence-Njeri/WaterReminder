@@ -2,6 +2,7 @@ package com.florencenjeri.waterreminder.ui.view
 
 import android.os.Bundle
 import android.text.Html
+import android.util.Log
 import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -47,8 +48,7 @@ class HomeFragment : Fragment() {
         setHasOptionsMenu(true)
         homeViewModel.getUserSettingsData().observe(viewLifecycleOwner, Observer { settings ->
             //Initialize the global variables
-            homeViewModel.totalNumOfGlasses = settings.numOfGlasses
-            homeViewModel.dailyGoal = settings.numOfGlasses
+            homeViewModel.dailyWaterConsumptionGoal = settings.numOfGlasses
             userId = settings.id
             welcomeTextView.text = String.format(getString(R.string.hello_user), settings.name)
             String.format(getString(R.string.notification_title), settings.name)
@@ -66,7 +66,8 @@ class HomeFragment : Fragment() {
             val drawable = homeViewModel.generateProfileImage(firstLetter)
             myProfileImage.setImageDrawable(drawable)
             setGoalsTextView()
-            setNumOfGlassesLeft()
+            setNumOfGlassesLeftText()
+            setUpCircularSeekbar()
         })
 
         fab.setOnClickListener {
@@ -77,11 +78,11 @@ class HomeFragment : Fragment() {
 
     }
 
-    private fun setNumOfGlassesLeft() {
+    private fun setNumOfGlassesLeftText() {
         numOfGlassesLeft.text =
             String.format(
                 getString(R.string.glasses_left),
-                homeViewModel.getNumOfGlassesDrankLeft()
+                homeViewModel.getNumberOfGlassesLeft()
             )
     }
 
@@ -103,12 +104,12 @@ class HomeFragment : Fragment() {
 
     private fun setWaterDrankOnFabClick() {
         homeViewModel.incrementWaterIntake()
-        if (homeViewModel.totalNumOfGlasses - homeViewModel.userProgress >= 0) {
+        if (homeViewModel.getNumberOfGlassesLeft() >= 0) {
             setUpCircularSeekbar()
-            setNumOfGlassesLeft()
-            homeViewModel.setNumberOfGlassesLeft(homeViewModel.totalNumOfGlasses - homeViewModel.userProgress)
+            setNumOfGlassesLeftText()
+            homeViewModel.setNumberOfGlassesDrank(homeViewModel.userProgress)
         }
-        if (homeViewModel.totalNumOfGlasses - homeViewModel.userProgress == 0) {
+        if (homeViewModel.getNumberOfGlassesLeft() == 0) {
             showGoalAchievedDialog()
         }
     }
@@ -116,14 +117,14 @@ class HomeFragment : Fragment() {
     private fun setGoalsTextView() {
         val goalText = String.format(
             getString(R.string.todays_goal),
-            homeViewModel.totalNumOfGlasses
+            homeViewModel.dailyWaterConsumptionGoal
         )
         val styledText: CharSequence = Html.fromHtml(goalText)
         goalsTextView.text = styledText
     }
 
     fun checkWaterConsumptionGoalAchieved(): Boolean =
-        homeViewModel.userProgress == homeViewModel.totalNumOfGlasses
+        homeViewModel.userProgress == homeViewModel.dailyWaterConsumptionGoal
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         super.onCreateOptionsMenu(menu, inflater)
@@ -144,9 +145,10 @@ class HomeFragment : Fragment() {
     }
 
     private fun setUpCircularSeekbar() {
-        val max = homeViewModel.totalNumOfGlasses.toFloat()
+        val max = homeViewModel.dailyWaterConsumptionGoal.toFloat()
         val progress = homeViewModel.userProgress.toFloat()
-
+        Log.d("UserP", max.toString())
+        Log.d("UserP2", progress.toString())
         val percentage = progress / max * 100
         arcProgress.progress = percentage.toInt()
     }
