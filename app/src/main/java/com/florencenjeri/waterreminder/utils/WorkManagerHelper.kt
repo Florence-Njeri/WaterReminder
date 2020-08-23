@@ -28,8 +28,8 @@ open class WorkManagerHelper(
         val delayTime = prefs.getLong(UserPrefsManager.TIME_DELAY_PREFS, 0)
         Log.d("SettingsDelayTimeWorker", delayTime.toString())
         return PeriodicWorkRequestBuilder<ReminderWorkManager>(
-            delayTime,
-            TimeUnit.HOURS
+            delayTime * 60,
+            TimeUnit.MINUTES
         ).setInitialDelay(delayTime, TimeUnit.HOURS)
             .build()
     }
