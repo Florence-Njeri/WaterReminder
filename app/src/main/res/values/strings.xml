@@ -24,4 +24,22 @@
     <string name="goal_achieved_dialog_title">You have attained your daily goal</string>
     <string name="good_work">OK</string>
     <string name="glasses_left">%1$s glasses</string>
+    <string name="name_icon">Name Icon</string>
+    <string name="daily_water_consumption_goal">Daily water consumption goal:</string>
+    <string name="daily_goal_hint">e.g. 3000ml</string>
+    <string name="size_of_glass">Size of Glass:</string>
+    <string name="size_of_glass_hint">e.g. 500ml</string>
+    <string name="sleep_schedule">Sleep Schedule</string>
+    <string name="sleep_time_default_text">10:00PM</string>
+    <string name="to">to</string>
+    <string name="wakeup_time_default_text">7:00AM</string>
+    <string name="gender">Gender</string>
+    <string name="weight">Weight:</string>
+    <string name="weight_hint">e.g. 50kgs</string>
+    <string name="height">Height:</string>
+    <string name="height_hint_text_view">e.g. 162 cm</string>
+    <string name="kgs_ml">Kgs | Ml</string>
+    <string name="lbs_oz">Lbs | oz</string>
+    <string name="save_button_text">Save</string>
+    <string name="num_of_glasses">6</string>
 </resources>

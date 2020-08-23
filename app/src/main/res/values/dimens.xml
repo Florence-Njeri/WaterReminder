@@ -2,4 +2,12 @@
     <dimen name="fab_margin">16dp</dimen>
     <dimen name="margin">16dp</dimen>
     <dimen name="text_size_sixteen" />
+    <dimen name="card_elevation">20dp</dimen>
+    <dimen name="card_corner_radius">4dp</dimen>
+    <dimen name="view_height">1dp</dimen>
+    <dimen name="time_picker_button_height">32dp</dimen>
+    <dimen name="button_container_height">30dp</dimen>
+    <dimen name="save_button_height">48dp</dimen>
+    <dimen name="save_button_width">102dp</dimen>
+    <dimen name="profile_magin_start">32dp</dimen>
 </resources>
