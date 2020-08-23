@@ -46,15 +46,14 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setHasOptionsMenu(true)
+        homeViewModel.startReminder()
         homeViewModel.getUserSettingsData().observe(viewLifecycleOwner, Observer { settings ->
             //Initialize the global variables
             homeViewModel.dailyWaterConsumptionGoal = settings.numOfGlasses
             userId = settings.id
             welcomeTextView.text = String.format(getString(R.string.hello_user), settings.name)
             String.format(getString(R.string.notification_title), settings.name)
-            if (checkWaterConsumptionGoalAchieved()) {
-                homeViewModel.stopReminder()
-            }
+
             val styledBottomText = Html.fromHtml(
                 String.format(
                     getString(R.string.goal_progress),
@@ -111,6 +110,7 @@ class HomeFragment : Fragment() {
         }
         if (homeViewModel.getNumberOfGlassesLeft() == 0) {
             showGoalAchievedDialog()
+            homeViewModel.stopReminder()
         }
     }
 
@@ -122,9 +122,6 @@ class HomeFragment : Fragment() {
         val styledText: CharSequence = Html.fromHtml(goalText)
         goalsTextView.text = styledText
     }
-
-    fun checkWaterConsumptionGoalAchieved(): Boolean =
-        homeViewModel.userProgress == homeViewModel.dailyWaterConsumptionGoal
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         super.onCreateOptionsMenu(menu, inflater)

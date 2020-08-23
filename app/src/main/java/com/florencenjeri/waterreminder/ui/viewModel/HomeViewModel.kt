@@ -26,6 +26,10 @@ class HomeViewModel(
         workManagerHelper.stopReminder()
     }
 
+    fun startReminder() {
+        workManagerHelper.scheduleWaterReminder()
+    }
+
     fun checkIfUserIsOnboarded() = userRepository.isUserOnboard()
 
     fun setUserOnboardedToTrue() = userRepository.setUserOnboarded(true)
