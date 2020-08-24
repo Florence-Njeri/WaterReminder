@@ -7,10 +7,10 @@ import androidx.room.OnConflictStrategy
 import androidx.room.Query
 
 @Dao
-interface WaterDataDao {
+interface WaterConsumptionDataDao {
     @Query("SELECT * FROM water_taken_data")
-    fun getWaterData(): LiveData<WaterDataEntity>
+    fun getWaterConsumptionData(): LiveData<WaterDataEntity>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun setUserSettings(waterDataEntity: WaterDataEntity)
+    fun insertUserConsumptionData(waterDataEntity: WaterDataEntity)
 }
