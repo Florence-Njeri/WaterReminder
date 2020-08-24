@@ -26,9 +26,9 @@ class UserPrefsManager(private val prefs: SharedPreferences) {
         prefs.edit().putLong(TIME_DELAY_PREFS, time).apply()
     }
 
-    fun setNumberOfGlassesToDrink(numOfGlasses: Int) {
+    fun setNumberOfGlassesDrank(numOfGlasses: Int) {
         prefs.edit().putInt(NUM_OF_GLASSES, numOfGlasses).apply()
     }
 
-    fun getNumOfGlassesToDrink() = prefs.getInt(NUM_OF_GLASSES, 0)
+    fun getNumOfGlassesDrank() = prefs.getInt(NUM_OF_GLASSES, 0)
 }

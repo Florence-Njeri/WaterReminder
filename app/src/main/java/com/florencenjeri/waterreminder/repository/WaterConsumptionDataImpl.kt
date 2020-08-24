@@ -5,7 +5,7 @@ import com.florencenjeri.waterreminder.database.WaterConsumptionDataDao
 import com.florencenjeri.waterreminder.database.WaterDataEntity
 
 class WaterConsumptionDataImpl(val waterConsumptionDao: WaterConsumptionDataDao) :
-    WaterConsumpttionDataRepository {
+    WaterConsumptionDataRepository {
     override fun insertWaterConsumptionData(waterDataEntity: WaterDataEntity) {
         waterConsumptionDao.insertUserConsumptionData(waterDataEntity)
     }
