@@ -7,6 +7,8 @@ import com.florencenjeri.waterreminder.di.applicationModule
 import com.florencenjeri.waterreminder.di.databaseModule
 import com.florencenjeri.waterreminder.di.presenterModule
 import com.florencenjeri.waterreminder.di.repositoryModule
+import com.florencenjeri.waterreminder.utils.WorkManagerHelper
+import org.koin.android.ext.android.inject
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.core.context.startKoin
@@ -35,5 +37,7 @@ class App : Application() {
                 presenterModule, databaseModule, applicationModule, repositoryModule
             )
         }
+        val workManagerHelper: WorkManagerHelper by inject()
+        workManagerHelper.scheduleDailyWaterDaterDatabaseSync()
     }
 }

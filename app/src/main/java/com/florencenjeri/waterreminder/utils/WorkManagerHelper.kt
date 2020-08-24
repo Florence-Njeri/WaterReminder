@@ -2,12 +2,11 @@ package com.florencenjeri.waterreminder.utils
 
 import android.content.SharedPreferences
 import android.util.Log
-import androidx.work.ExistingPeriodicWorkPolicy
-import androidx.work.PeriodicWorkRequest
-import androidx.work.PeriodicWorkRequestBuilder
-import androidx.work.WorkManager
+import androidx.work.*
 import com.florencenjeri.waterreminder.prefs.UserPrefsManager
 import com.florencenjeri.waterreminder.workmanager.ReminderWorkManager
+import com.florencenjeri.waterreminder.workmanager.SyncDataToDb
+import java.util.*
 import java.util.concurrent.TimeUnit
 
 open class WorkManagerHelper(
@@ -22,6 +21,28 @@ open class WorkManagerHelper(
             ExistingPeriodicWorkPolicy.KEEP,
             worker
         )
+    }
+
+    fun scheduleDailyWaterDaterDatabaseSync() {
+        //This is my new default
+        val currentDate = Calendar.getInstance()
+        val dueDate = Calendar.getInstance()
+        // Set Execution around 00:00:00 AM
+        dueDate.set(Calendar.HOUR_OF_DAY, 0)
+        dueDate.set(Calendar.MINUTE, 0)
+        dueDate.set(Calendar.SECOND, 0)
+        if (dueDate.before(currentDate)) {
+            dueDate.add(Calendar.HOUR_OF_DAY, 24)
+        }
+        val timeDiff = dueDate.timeInMillis.minus(currentDate.timeInMillis)
+        val dailyWorkRequest = buildWaterDatabaseSyncWorker(timeDiff)
+        workManager.enqueue(dailyWorkRequest)
+    }
+
+    private fun buildWaterDatabaseSyncWorker(timeDiff: Long): OneTimeWorkRequest {
+        return OneTimeWorkRequestBuilder<SyncDataToDb>()
+            .setInitialDelay(timeDiff, TimeUnit.MILLISECONDS)
+            .addTag("WATER_DB_DAILY_SYNC").build()
     }
 
     private fun buildWorker(): PeriodicWorkRequest {

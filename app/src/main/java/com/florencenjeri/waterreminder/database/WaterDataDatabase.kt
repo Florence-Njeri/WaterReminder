@@ -5,7 +5,7 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 
-@Database(entities = [(WaterConsumptionDataDao::class)], version = 1)
+@Database(entities = [(WaterDataEntity::class)], version = 1)
 abstract class WaterDataDatabase : RoomDatabase() {
     abstract fun waterDataDao(): WaterConsumptionDataDao
 
