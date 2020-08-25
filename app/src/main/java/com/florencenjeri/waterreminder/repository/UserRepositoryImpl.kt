@@ -20,4 +20,6 @@ class UserRepositoryImpl(private val sharedPreferenceManager: UserPrefsManager) 
     }
 
     override fun getNumOfGlassesDrank(): Int = sharedPreferenceManager.getNumOfGlassesDrank()
+
+    override fun clearWaterData(): Boolean = sharedPreferenceManager.clearWaterData()
 }

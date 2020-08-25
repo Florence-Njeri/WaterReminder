@@ -4,8 +4,8 @@ import android.content.SharedPreferences
 import android.util.Log
 import androidx.work.*
 import com.florencenjeri.waterreminder.prefs.UserPrefsManager
-import com.florencenjeri.waterreminder.workmanager.ReminderWorkManager
-import com.florencenjeri.waterreminder.workmanager.SyncDataToDb
+import com.florencenjeri.waterreminder.workmanager.NotificationWorker
+import com.florencenjeri.waterreminder.workmanager.SyncDataToDbWorker
 import java.util.*
 import java.util.concurrent.TimeUnit
 
@@ -17,7 +17,7 @@ open class WorkManagerHelper(
     fun scheduleWaterReminder() {
         val worker = buildWorker()
         workManager.enqueueUniquePeriodicWork(
-            ReminderWorkManager.WORKER_ID,
+            NotificationWorker.WORKER_ID,
             ExistingPeriodicWorkPolicy.KEEP,
             worker
         )
@@ -40,7 +40,7 @@ open class WorkManagerHelper(
     }
 
     private fun buildWaterDatabaseSyncWorker(timeDiff: Long): OneTimeWorkRequest {
-        return OneTimeWorkRequestBuilder<SyncDataToDb>()
+        return OneTimeWorkRequestBuilder<SyncDataToDbWorker>()
             .setInitialDelay(timeDiff, TimeUnit.MILLISECONDS)
             .addTag("WATER_DB_DAILY_SYNC").build()
     }
@@ -48,7 +48,7 @@ open class WorkManagerHelper(
     private fun buildWorker(): PeriodicWorkRequest {
         val delayTime = prefs.getLong(UserPrefsManager.TIME_DELAY_PREFS, 0)
         Log.d("SettingsDelayTimeWorker", delayTime.toString())
-        return PeriodicWorkRequestBuilder<ReminderWorkManager>(
+        return PeriodicWorkRequestBuilder<NotificationWorker>(
             delayTime,
             TimeUnit.SECONDS
         ).setInitialDelay(delayTime, TimeUnit.SECONDS)
@@ -56,6 +56,6 @@ open class WorkManagerHelper(
     }
 
     fun stopReminder() {
-        workManager.cancelUniqueWork(ReminderWorkManager.WORKER_ID)
+        workManager.cancelUniqueWork(NotificationWorker.WORKER_ID)
     }
 }

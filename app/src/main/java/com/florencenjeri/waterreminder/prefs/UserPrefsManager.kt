@@ -31,4 +31,6 @@ class UserPrefsManager(private val prefs: SharedPreferences) {
     }
 
     fun getNumOfGlassesDrank() = prefs.getInt(NUM_OF_GLASSES, 0)
+
+    fun clearWaterData() = prefs.edit().remove(NUM_OF_GLASSES).commit()
 }

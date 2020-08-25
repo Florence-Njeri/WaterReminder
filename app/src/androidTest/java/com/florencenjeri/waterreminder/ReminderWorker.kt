@@ -7,7 +7,7 @@ import androidx.test.espresso.matcher.ViewMatchers.assertThat
 import androidx.work.*
 import androidx.work.testing.SynchronousExecutor
 import androidx.work.testing.WorkManagerTestInitHelper
-import com.florencenjeri.waterreminder.workmanager.ReminderWorkManager
+import com.florencenjeri.waterreminder.workmanager.NotificationWorker
 import org.hamcrest.CoreMatchers.`is`
 import org.junit.Before
 import org.junit.Test
@@ -38,7 +38,7 @@ class ReminderWorker {
         val input = workDataOf("One" to 1, "Two" to 2)
 
         // Create request
-        val request = PeriodicWorkRequestBuilder<ReminderWorkManager>(15, TimeUnit.MINUTES)
+        val request = PeriodicWorkRequestBuilder<NotificationWorker>(15, TimeUnit.MINUTES)
             .setInputData(input)
             .build()
 

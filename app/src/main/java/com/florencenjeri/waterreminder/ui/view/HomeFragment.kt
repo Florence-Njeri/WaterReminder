@@ -47,6 +47,7 @@ class HomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         setHasOptionsMenu(true)
         homeViewModel.startReminder()
+        homeViewModel.startDailyWaterDatabaseSync()
         homeViewModel.getUserSettingsData().observe(viewLifecycleOwner, Observer { settings ->
             //Initialize the global variables
             homeViewModel.dailyWaterConsumptionGoal = settings.numOfGlasses

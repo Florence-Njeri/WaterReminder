@@ -12,7 +12,7 @@ import com.florencenjeri.waterreminder.App
 import com.florencenjeri.waterreminder.R
 
 
-class ReminderWorkManager(
+class NotificationWorker(
     context: Context,
     workerParameters: WorkerParameters
 ) :
@@ -27,6 +27,7 @@ class ReminderWorkManager(
             triggerNotification()
             Result.success()
         } catch (error: Throwable) {
+            error.printStackTrace()
             Result.failure()
         }
 

@@ -7,5 +7,6 @@ interface UserRepository {
     fun setUserOnboarded(isUserOnboard: Boolean)
     fun setNumberOfGlassesDrank(numOfGlasses: Int)
     fun getNumOfGlassesDrank(): Int
+    fun clearWaterData(): Boolean
 
 }

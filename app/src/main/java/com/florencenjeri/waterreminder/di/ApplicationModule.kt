@@ -7,7 +7,8 @@ import com.florencenjeri.waterreminder.ui.view.ProfileSettingsFragment
 import com.florencenjeri.waterreminder.utils.CredentialsValidator
 import com.florencenjeri.waterreminder.utils.SettingsCredentialsValidator
 import com.florencenjeri.waterreminder.utils.WorkManagerHelper
-import com.florencenjeri.waterreminder.workmanager.ReminderWorkManager
+import com.florencenjeri.waterreminder.workmanager.NotificationWorker
+import com.florencenjeri.waterreminder.workmanager.SyncDataToDbWorker
 import org.koin.android.ext.koin.androidContext
 import org.koin.dsl.module
 
@@ -20,6 +21,7 @@ val applicationModule = module {
     //WorkManager
     single { WorkManager.getInstance(get()) }
     single { WorkManagerHelper(get(), get()) }
-    single { ReminderWorkManager(androidContext(), get()) }
+    single { NotificationWorker(androidContext(), get()) }
+    single { SyncDataToDbWorker(androidContext(), get()) }
 }
 private const val USER_PREFS = ""

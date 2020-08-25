@@ -49,6 +49,7 @@ class HomeViewModel(
         userRepository.setNumberOfGlassesDrank(numOfGlassesLeft)
     }
 
+    fun startDailyWaterDatabaseSync() = workManagerHelper.scheduleDailyWaterDaterDatabaseSync()
     fun generateProfileImage(firstLetter: String?): Drawable {
         val generator: ColorGenerator = ColorGenerator.MATERIAL // or use DEFAULT
         // generate random color
