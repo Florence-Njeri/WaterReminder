@@ -3,6 +3,7 @@ package com.florencenjeri.waterreminder.ui.view
 import android.app.TimePickerDialog
 import android.os.Bundle
 import android.text.format.DateFormat
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -63,10 +64,11 @@ class ProfileSettingsFragment : Fragment() {
             val numOfGlasses =
                 profileSettingsViewModel.getTotalNumOfGlasses(goal.toInt(), cupMeasurement.toInt())
             val hoursAwake = getNumOfHoursAwake(startTime, endTime)
-            val delayTime = profileSettingsViewModel.getScheduledNotificationsDelayTime(
+            val delayTime = profileSettingsViewModel.getScheduledNotificationsRepeatInterval(
                 hoursAwake,
                 numOfGlasses
             )
+            val notificationsInterval = delayTime * 60 * 60
             profileSettingsViewModel.checkCredentials(
                 name,
                 goal,
@@ -91,7 +93,8 @@ class ProfileSettingsFragment : Fragment() {
                 delayTime
             )
             profileSettingsViewModel.saveUserSettings(settings)
-            profileSettingsViewModel.storeDelayTime(delayTime.toLong())
+            profileSettingsViewModel.storeDelayTime(notificationsInterval.toLong())
+            Log.d("DelayInterval", notificationsInterval.toString())
         }
     }
 

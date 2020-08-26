@@ -71,7 +71,10 @@ class ProfileSettingsViewModel(
 
     fun getTotalNumOfGlasses(dailyGoal: Int, glassCapacity: Int): Int = dailyGoal / glassCapacity
 
-    fun getScheduledNotificationsDelayTime(totalNumberOfHoursAwake: Int, numOfglasses: Int): Int =
+    fun getScheduledNotificationsRepeatInterval(
+        totalNumberOfHoursAwake: Int,
+        numOfglasses: Int
+    ): Int =
         totalNumberOfHoursAwake / numOfglasses
 
     fun checkUsername() {

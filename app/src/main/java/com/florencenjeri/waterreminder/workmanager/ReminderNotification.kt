@@ -22,7 +22,7 @@ fun NotificationManager.sendNotification(messageBody: String, applicationContext
         applicationContext,
         applicationContext.getString(R.string.drink_water_channel_id)
     )
-        .setSmallIcon(R.drawable.ic_drink)
+        .setSmallIcon(R.drawable.ic_water_drop)
         .setContentTitle(applicationContext.getString(R.string.notification_title))
         .setContentText(messageBody)
         .setContentIntent(contentPendingIntent)

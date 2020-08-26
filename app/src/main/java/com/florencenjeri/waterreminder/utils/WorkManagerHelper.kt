@@ -29,8 +29,8 @@ open class WorkManagerHelper(
         Log.d("SettingsDelayTimeWorker", delayTime.toString())
         return PeriodicWorkRequestBuilder<ReminderWorkManager>(
             delayTime,
-            TimeUnit.HOURS
-        ).setInitialDelay(delayTime, TimeUnit.HOURS)
+            TimeUnit.SECONDS
+        )
             .build()
     }
 

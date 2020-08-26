@@ -4,16 +4,14 @@ import android.os.Bundle
 import android.text.Html
 import android.util.Log
 import android.view.*
-import android.view.View.GONE
-import android.view.View.VISIBLE
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.florencenjeri.waterreminder.R
+import com.florencenjeri.waterreminder.dialog.CongratsDialog
 import com.florencenjeri.waterreminder.ui.viewModel.HomeViewModel
 import com.google.android.material.transition.MaterialSharedAxis
 import kotlinx.android.synthetic.main.fragment_home.*
-import me.tankery.lib.circularseekbar.CircularSeekBar
 import org.koin.android.viewmodel.ext.android.viewModel
 import uk.co.samuelwall.materialtaptargetprompt.MaterialTapTargetPrompt
 import uk.co.samuelwall.materialtaptargetprompt.MaterialTapTargetPrompt.PromptStateChangeListener
@@ -48,36 +46,43 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setHasOptionsMenu(true)
-        dailyProgressButton.isSelected = true
+        homeViewModel.startReminder()
         homeViewModel.getUserSettingsData().observe(viewLifecycleOwner, Observer { settings ->
             //Initialize the global variables
-            homeViewModel.totalNumOfGlasses = settings.numOfGlasses
-            homeViewModel.dailyGoal = settings.numOfGlasses
+            homeViewModel.dailyWaterConsumptionGoal = settings.numOfGlasses
             userId = settings.id
             welcomeTextView.text = String.format(getString(R.string.hello_user), settings.name)
             String.format(getString(R.string.notification_title), settings.name)
-            Log.d("Settings", settings.toString())
-            if (checkWaterConsumptionGoalAchieved()) {
-                homeViewModel.stopReminder()
-            }
 
+            val styledBottomText = Html.fromHtml(
+                String.format(
+                    getString(R.string.goal_progress),
+                    homeViewModel.userProgress.toString()
+                )
+            )
+            arcProgress.bottomText = styledBottomText.toString()
             val firstLetter = settings.name.substring(0, 1).toUpperCase()
             val drawable = homeViewModel.generateProfileImage(firstLetter)
             myProfileImage.setImageDrawable(drawable)
-            val goalText = String.format(
-                getString(R.string.water_consumption_goal),
-                homeViewModel.totalNumOfGlasses - homeViewModel.userProgress
-            )
-            val styledText: CharSequence = Html.fromHtml(goalText)
-            goalsTextView.text = styledText
+            setGoalsTextView()
+            setNumOfGlassesLeftText()
+            setUpCircularSeekbar()
         })
 
         fab.setOnClickListener {
-            homeViewModel.incrementWaterIntake()
             setWaterDrankOnFabClick()
         }
         setNewUserOnBoarded()
+        arcProgress.progress = 0
 
+    }
+
+    private fun setNumOfGlassesLeftText() {
+        numOfGlassesLeft.text =
+            String.format(
+                getString(R.string.glasses_left),
+                homeViewModel.getNumberOfGlassesLeft()
+            )
     }
 
     private fun setNewUserOnBoarded() {
@@ -97,26 +102,26 @@ class HomeFragment : Fragment() {
     }
 
     private fun setWaterDrankOnFabClick() {
-        //TODO : Increase the capacity of water consumed that day
-
-        //TODO : Fix this bug
-        if (homeViewModel.totalNumOfGlasses - homeViewModel.userProgress >= 0) {
+        homeViewModel.incrementWaterIntake()
+        if (homeViewModel.getNumberOfGlassesLeft() >= 0) {
             setUpCircularSeekbar()
-            val goalText = String.format(
-                getString(R.string.water_consumption_goal),
-                homeViewModel.totalNumOfGlasses - homeViewModel.userProgress
-            )
-            val styledText: CharSequence = Html.fromHtml(goalText)
-            goalsTextView.text = styledText
+            setNumOfGlassesLeftText()
+            homeViewModel.setNumberOfGlassesDrank(homeViewModel.userProgress)
         }
-        if (homeViewModel.totalNumOfGlasses - homeViewModel.userProgress == 0) {
-            goalsTextView.visibility = GONE
-            textViewGoalComplete.visibility = VISIBLE
+        if (homeViewModel.getNumberOfGlassesLeft() == 0) {
+            showGoalAchievedDialog()
+            homeViewModel.stopReminder()
         }
     }
 
-    fun checkWaterConsumptionGoalAchieved(): Boolean =
-        homeViewModel.userProgress == homeViewModel.totalNumOfGlasses
+    private fun setGoalsTextView() {
+        val goalText = String.format(
+            getString(R.string.todays_goal),
+            homeViewModel.dailyWaterConsumptionGoal
+        )
+        val styledText: CharSequence = Html.fromHtml(goalText)
+        goalsTextView.text = styledText
+    }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         super.onCreateOptionsMenu(menu, inflater)
@@ -137,30 +142,12 @@ class HomeFragment : Fragment() {
     }
 
     private fun setUpCircularSeekbar() {
-        circularSeekBar.max = homeViewModel.dailyGoal.toFloat()
-        circularSeekBar.progress = homeViewModel.userProgress.toFloat()
-
-        circularSeekBar.setOnSeekBarChangeListener(object :
-            CircularSeekBar.OnCircularSeekBarChangeListener {
-            override fun onProgressChanged(
-                circularSeekBar: CircularSeekBar?,
-                progress: Float,
-                fromUser: Boolean
-            ) {
-                //On fab clicked, update the progress bar
-                circularSeekBar?.progress = homeViewModel.userProgress.toFloat()
-            }
-
-            override fun onStartTrackingTouch(seekBar: CircularSeekBar?) {
-                TODO("Not yet implemented")
-            }
-
-            override fun onStopTrackingTouch(seekBar: CircularSeekBar?) {
-                TODO("Not yet implemented")
-            }
-
-
-        })
+        val max = homeViewModel.dailyWaterConsumptionGoal.toFloat()
+        val progress = homeViewModel.userProgress.toFloat()
+        Log.d("UserP", max.toString())
+        Log.d("UserP2", progress.toString())
+        val percentage = progress / max * 100
+        arcProgress.progress = percentage.toInt()
     }
 
     private fun zTransitionFromProfileSettingsFragment() {
@@ -181,4 +168,8 @@ class HomeFragment : Fragment() {
         exitTransition = forward
     }
 
+    private fun showGoalAchievedDialog() {
+        CongratsDialog.newInstance(getString(R.string.goal_achieved_dialog_title))
+            .show(parentFragmentManager, CongratsDialog.TAG)
+    }
 }

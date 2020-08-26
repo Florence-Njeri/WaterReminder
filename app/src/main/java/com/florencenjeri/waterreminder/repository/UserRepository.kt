@@ -5,4 +5,7 @@ interface UserRepository {
     fun configuredUserSettings(isConfigured: Boolean)
     fun isUserOnboard(): Boolean
     fun setUserOnboarded(isUserOnboard: Boolean)
+    fun setNumberOfGlassesDrank(numOfGlasses: Int)
+    fun getNumOfGlassesDrank(): Int
+
 }

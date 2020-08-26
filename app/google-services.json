@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "42410688934",
+    "firebase_url": "https://waterreminder-893af.firebaseio.com",
+    "project_id": "waterreminder-893af",
+    "storage_bucket": "waterreminder-893af.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:42410688934:android:5e989efb748d7bcab80f67",
+        "android_client_info": {
+          "package_name": "com.florencenjeri.waterreminder"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "42410688934-f02bm47ch4lu2eisqq7bk5qflmsrq7hi.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.florencenjeri.waterreminder",
+            "certificate_hash": "c8bc50720d363aaa1a39bdf7d668340c516c301e"
+          }
+        },
+        {
+          "client_id": "42410688934-19gv7kfpt357n4l4g5l7cp0g608ur363.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAjoa1qgq_1mqy15uDM8wvdBinnTGqDuEo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "42410688934-19gv7kfpt357n4l4g5l7cp0g608ur363.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

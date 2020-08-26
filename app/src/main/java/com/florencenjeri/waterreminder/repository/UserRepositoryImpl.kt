@@ -14,4 +14,10 @@ class UserRepositoryImpl(private val sharedPreferenceManager: UserPrefsManager) 
 
     override fun setUserOnboarded(isUserOnboard: Boolean) =
         sharedPreferenceManager.setUserOnboarded(isUserOnboard)
+
+    override fun setNumberOfGlassesDrank(numOfGlasses: Int) {
+        sharedPreferenceManager.setNumberOfGlassesToDrink(numOfGlasses)
+    }
+
+    override fun getNumOfGlassesDrank(): Int = sharedPreferenceManager.getNumOfGlassesToDrink()
 }
