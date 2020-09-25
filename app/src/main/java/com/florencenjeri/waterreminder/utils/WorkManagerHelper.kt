@@ -29,7 +29,7 @@ open class WorkManagerHelper(
         val dueDate = Calendar.getInstance()
         // Set Execution around 00:00:00 AM
         dueDate.set(Calendar.HOUR_OF_DAY, 0)
-        dueDate.set(Calendar.MINUTE, 0)
+        dueDate.set(Calendar.MINUTE,0)
         dueDate.set(Calendar.SECOND, 0)
         if (dueDate.before(currentDate)) {
             dueDate.add(Calendar.HOUR_OF_DAY, 24)
@@ -40,6 +40,7 @@ open class WorkManagerHelper(
     }
 
     private fun buildWaterDatabaseSyncWorker(timeDiff: Long): OneTimeWorkRequest {
+        Log.d("TimeDiff",timeDiff.toString())
         return OneTimeWorkRequestBuilder<SyncDataToDbWorker>()
             .setInitialDelay(timeDiff, TimeUnit.MILLISECONDS)
             .addTag("WATER_DB_DAILY_SYNC").build()

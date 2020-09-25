@@ -61,6 +61,7 @@ class HomeFragment : Fragment() {
                     homeViewModel.userProgress.toString()
                 )
             )
+            Log.d("GoalAttanedInGlasses", homeViewModel.userProgress.toString())
             arcProgress.bottomText = styledBottomText.toString()
             val firstLetter = settings.name.substring(0, 1).toUpperCase()
             val drawable = homeViewModel.generateProfileImage(firstLetter)
