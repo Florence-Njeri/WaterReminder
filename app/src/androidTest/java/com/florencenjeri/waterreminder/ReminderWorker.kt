@@ -45,8 +45,6 @@ class ReminderWorker {
         val workManager = WorkManager.getInstance(context)
         val testDriver = WorkManagerTestInitHelper.getTestDriver(context)
 
-//        val workManagerHelper = WorkManagerHelper(workManager)
-//        val workSheduledToRun = workManagerHelper.scheduleWaterReminder()
         workManager.enqueue(request).result.get()
         testDriver?.setPeriodDelayMet(request.id)
 
@@ -54,12 +52,6 @@ class ReminderWorker {
         val workInfo = workManager.getWorkInfoById(request.id).get()
         // Assert
         assertThat(workInfo.state, `is`(WorkInfo.State.RUNNING))
-
-        // Get the ListenableWorker
-//        val worker = TestListenableWorkerBuilder<ReminderWorkManager>(context).build()
-//        // Start the work synchronously
-//        val result = worker.startWork().get()
-//        Assert.assertTrue(result == ListenableWorker.Result.success())
 
     }
 }

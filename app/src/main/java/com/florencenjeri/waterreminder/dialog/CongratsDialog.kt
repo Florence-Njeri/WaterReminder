@@ -55,7 +55,6 @@ class CongratsDialog : DialogFragment() {
 
     private fun setupClickListeners(view: View) {
         view.buttonClaimBadge.setOnClickListener {
-            // TODO: Do some task here
             dismiss()
         }
     }

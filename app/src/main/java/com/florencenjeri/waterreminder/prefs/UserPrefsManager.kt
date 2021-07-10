@@ -1,7 +1,9 @@
 package com.florencenjeri.waterreminder.prefs
 
 import android.content.SharedPreferences
-
+/**
+Stores the users preference locally
+ */
 class UserPrefsManager(private val prefs: SharedPreferences) {
     companion object {
         private const val USER_PREFS = "user-settings_config"

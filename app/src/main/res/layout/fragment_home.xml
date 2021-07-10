@@ -66,32 +66,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/welcomeTextView" />
 
-        <!--        <TextView-->
-        <!--            android:id="@+id/textViewSummary"-->
-        <!--            android:layout_width="wrap_content"-->
-        <!--            android:layout_height="wrap_content"-->
-        <!--            android:layout_marginStart="16dp"-->
-        <!--            android:layout_marginTop="24dp"-->
-        <!--            android:layout_marginEnd="16dp"-->
-        <!--            android:text="Summary"-->
-        <!--            android:textAllCaps="true"-->
-        <!--            android:textColor="@color/black"-->
-        <!--            android:textStyle="bold"-->
-        <!--            app:layout_constraintEnd_toEndOf="parent"-->
-        <!--            app:layout_constraintStart_toStartOf="parent"-->
-        <!--            app:layout_constraintTop_toBottomOf="@+id/goalsTextView" />-->
-
-        <!--        <com.github.mikephil.charting.charts.LineChart-->
-        <!--            android:id="@+id/chart"-->
-        <!--            android:layout_width="match_parent"-->
-        <!--            android:layout_height="400dp"-->
-        <!--            android:layout_marginStart="16dp"-->
-        <!--            android:layout_marginTop="16dp"-->
-        <!--            android:layout_marginEnd="16dp"-->
-        <!--            app:layout_constraintEnd_toEndOf="parent"-->
-        <!--            app:layout_constraintStart_toStartOf="parent"-->
-        <!--            app:layout_constraintTop_toBottomOf="@+id/textViewSummary" />-->
-
         <TextView
             android:id="@+id/textView"
             android:layout_width="wrap_content"
@@ -135,6 +109,18 @@
             app:layout_constraintTop_toBottomOf="@+id/textView"
             tools:text="6 glasses" />
 
+        <com.github.mikephil.charting.charts.BarChart
+            android:id="@+id/barChart"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="72dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/textView"
+            app:layout_constraintTop_toBottomOf="@+id/numOfGlassesLeft"
+            app:layout_constraintVertical_bias="0.0" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -144,7 +130,7 @@
         android:layout_alignParentBottom="true"
         android:layout_gravity="bottom|end"
         android:layout_marginEnd="40dp"
-        android:layout_marginBottom="24dp"
+        android:layout_marginBottom="16dp"
         android:backgroundTint="@color/colorAccent"
         android:tint="@color/white"
         android:tooltipText="Press once you have drank a glass of water"

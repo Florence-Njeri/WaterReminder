@@ -1,5 +1,6 @@
 package com.florencenjeri.waterreminder.ui.view
 
+import android.graphics.Color
 import android.os.Bundle
 import android.text.Html
 import android.util.Log
@@ -10,11 +11,18 @@ import androidx.navigation.fragment.findNavController
 import com.florencenjeri.waterreminder.R
 import com.florencenjeri.waterreminder.dialog.CongratsDialog
 import com.florencenjeri.waterreminder.ui.viewModel.HomeViewModel
+import com.github.mikephil.charting.data.BarData
+import com.github.mikephil.charting.data.BarDataSet
+import com.github.mikephil.charting.data.BarEntry
+import com.github.mikephil.charting.formatter.IndexAxisValueFormatter
+import com.github.mikephil.charting.utils.ColorTemplate
 import com.google.android.material.transition.MaterialSharedAxis
 import kotlinx.android.synthetic.main.fragment_home.*
 import org.koin.android.viewmodel.ext.android.viewModel
 import uk.co.samuelwall.materialtaptargetprompt.MaterialTapTargetPrompt
 import uk.co.samuelwall.materialtaptargetprompt.MaterialTapTargetPrompt.PromptStateChangeListener
+import java.util.*
+import kotlin.collections.ArrayList
 
 
 /**
@@ -67,6 +75,7 @@ class HomeFragment : Fragment() {
             setGoalsTextView()
             setNumOfGlassesLeftText()
             setUpCircularSeekbar()
+
         })
 
         fab.setOnClickListener {
@@ -74,7 +83,7 @@ class HomeFragment : Fragment() {
         }
         setNewUserOnBoarded()
         arcProgress.progress = 0
-
+getDataSet()
     }
 
     private fun setNumOfGlassesLeftText() {
@@ -123,6 +132,9 @@ class HomeFragment : Fragment() {
         goalsTextView.text = styledText
     }
 
+    private fun setUpChart(){
+
+    }
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         super.onCreateOptionsMenu(menu, inflater)
         inflater.inflate(R.menu.menu_main, menu)
@@ -172,4 +184,38 @@ class HomeFragment : Fragment() {
         CongratsDialog.newInstance(getString(R.string.goal_achieved_dialog_title))
             .show(parentFragmentManager, CongratsDialog.TAG)
     }
+
+    //get x axis values ie the date
+    private fun getDayOfMonth():Int{
+        val calendar = Calendar.getInstance()
+        val day = calendar.get(Calendar.DAY_OF_MONTH)
+        return day
+    }
+
+    private fun getDataSet() {
+        val xAxisLabels = ArrayList<String>()
+        xAxisLabels.add(getDayOfMonth().toString())
+
+        //Bar Entries
+        val barEntries = ArrayList<BarEntry>()
+        barEntries.add(BarEntry(homeViewModel.getNumOfGlassesDrank().toFloat(), getDayOfMonth().toFloat()))
+
+        //Bar Dataset
+        val barDataSet = BarDataSet(barEntries, "Glasses of water drank")
+        barDataSet.color = Color.rgb(0, 155, 0)
+        barDataSet.setColors(*ColorTemplate.COLORFUL_COLORS)
+
+        //Bar Data (Add the x and the y values)
+        val data = BarData(barDataSet)
+        data.barWidth = 0.1f
+        barChart.data = data
+        barChart.setFitBars(true)
+        barChart.invalidate()
+        barChart.setNoDataText(" No water intake data found")
+        barChart.xAxis.valueFormatter = IndexAxisValueFormatter(xAxisLabels)
+        barChart.animateXY(3000, 3000)
+    }
+
+
+
 }
